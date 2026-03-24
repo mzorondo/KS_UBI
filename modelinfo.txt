@@ -1,0 +1,16 @@
+K+S (pub. firms)
+5.3.1
+26 February, 2024
+520x600+187+317
+670x425+899+594
+600x360+721+460:1.0+1.0
+860x502+20+25
+#
+#
+#
+860x580+803+373
+R/tariffs_trmk_trmc_0.3_country1/tariffs_trmk_trmc_0.3_country1.lsd
+Root
+1
+0
+0.0

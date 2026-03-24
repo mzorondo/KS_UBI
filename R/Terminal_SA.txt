@@ -1,0 +1,308 @@
+(base) [fanti@MICED748447 Rdata]$ mkdir LSD
+(base) [fanti@MICED748447 Rdata]$ ls
+allPlot0.1.R                    divergenceGroupSmoothOneByOnePDF.R   Script-per-grafici-KrigingGIUSTO.r
+convergenceGroupSmoothNoLogs.R  divergenceInTimeSmoothOneByOnePDF.R  Script-per-produrre-Summary-da-usare-per-Kriging.r
+convergenceGroupSmooth.R        kringigDataPreparationBeta2.R        ScriptXscrezia.r
+convergence.txt                 LSD                                  vuranoMicroMacro5.R
+(base) [fanti@MICED748447 Rdata]$ ls -d
+.
+(base) [fanti@MICED748447 Rdata]$ git clone https://github.com/SantannaKS/LSD.git
+Cloning into 'LSD'...
+remote: Enumerating objects: 54283, done.
+remote: Counting objects: 100% (4/4), done.
+remote: Compressing objects: 100% (4/4), done.
+remote: Total 54283 (delta 0), reused 1 (delta 0), pack-reused 54279
+Receiving objects: 100% (54283/54283), 780.24 MiB | 15.54 MiB/s, done.
+Resolving deltas: 100% (34627/34627), done.
+Updating files: 100% (15963/15963), done.
+(base) [fanti@MICED748447 Rdata]$ ls
+allPlot0.1.R                    divergenceGroupSmoothOneByOnePDF.R   Script-per-grafici-KrigingGIUSTO.r
+convergenceGroupSmoothNoLogs.R  divergenceInTimeSmoothOneByOnePDF.R  Script-per-produrre-Summary-da-usare-per-Kriging.r
+convergenceGroupSmooth.R        kringigDataPreparationBeta2.R        ScriptXscrezia.r
+convergence.txt                 LSD                                  vuranoMicroMacro5.R
+(base) [fanti@MICED748447 Rdata]$ pwd
+/home/fanti/Python/multicountry1.2/Rdata
+(base) [fanti@MICED748447 Rdata]$ cd ~
+(base) [fanti@MICED748447 ~]$ mkdir LSD
+mkdir: cannot create directory ‘LSD’: File exists
+(base) [fanti@MICED748447 ~]$ cd LSD
+(base) [fanti@MICED748447 LSD]$ ls
+Work
+(base) [fanti@MICED748447 LSD]$ cd Work/
+(base) [fanti@MICED748447 Work]$ ls
+KSv5
+(base) [fanti@MICED748447 Work]$ rm -R KSv5
+(base) [fanti@MICED748447 Work]$ ls
+(base) [fanti@MICED748447 Work]$ cd ..
+(base) [fanti@MICED748447 LSD]$ rm Work
+rm: cannot remove 'Work': Is a directory
+(base) [fanti@MICED748447 LSD]$ dir Work
+(base) [fanti@MICED748447 LSD]$ git clone https://github.com/SantannaKS/LSD.git
+Cloning into 'LSD'...
+remote: Enumerating objects: 54283, done.
+remote: Counting objects: 100% (4/4), done.
+remote: Compressing objects: 100% (4/4), done.
+remote: Total 54283 (delta 0), reused 1 (delta 0), pack-reused 54279
+Receiving objects: 100% (54283/54283), 780.24 MiB | 13.43 MiB/s, done.
+Resolving deltas: 100% (34627/34627), done.
+Updating files: 100% (15963/15963), done.
+(base) [fanti@MICED748447 LSD]$ cd Work/
+(base) [fanti@MICED748447 Work]$ mkdir k-s-labormkt
+(base) [fanti@MICED748447 Work]$ cd k-s-labormkt/
+(base) [fanti@MICED748447 k-s-labormkt]$ git clone https://bitbucket.org/MCP1/k-s-labormkt.git
+Cloning into 'k-s-labormkt'...
+remote: Bitbucket Cloud recently stopped supporting account passwords for Git authentication.
+remote: See our community post for more details: https://atlassian.community/t5/x/x/ba-p/1948231
+remote: App passwords are recommended for most use cases and can be created in your Personal settings:
+remote: https://bitbucket.org/account/settings/app-passwords/
+fatal: Authentication failed for 'https://bitbucket.org/MCP1/k-s-labormkt.git/'
+(base) [fanti@MICED748447 k-s-labormkt]$ git clone https://bitbucket.org/MCP1/k-s-labormkt.git
+Cloning into 'k-s-labormkt'...
+remote: Bitbucket Cloud recently stopped supporting account passwords for Git authentication.
+remote: See our community post for more details: https://atlassian.community/t5/x/x/ba-p/1948231
+remote: App passwords are recommended for most use cases and can be created in your Personal settings:
+remote: https://bitbucket.org/account/settings/app-passwords/
+fatal: Authentication failed for 'https://bitbucket.org/MCP1/k-s-labormkt.git/'
+(base) [fanti@MICED748447 k-s-labormkt]$ git clone https://bitbucket.org/MCP1/k-s-labormkt.git
+Cloning into 'k-s-labormkt'...
+remote: Bitbucket Cloud recently stopped supporting account passwords for Git authentication.
+remote: See our community post for more details: https://atlassian.community/t5/x/x/ba-p/1948231
+remote: App passwords are recommended for most use cases and can be created in your Personal settings:
+remote: https://bitbucket.org/account/settings/app-passwords/
+fatal: Authentication failed for 'https://bitbucket.org/MCP1/k-s-labormkt.git/'
+(base) [fanti@MICED748447 k-s-labormkt]$ ping https://bitbucket.org
+ping: https://bitbucket.org: Name or service not known
+(base) [fanti@MICED748447 k-s-labormkt]$ ping bitbucket.org
+PING bitbucket.org (104.192.141.1) 56(84) bytes of data.
+^C
+--- bitbucket.org ping statistics ---
+170 packets transmitted, 0 received, 100% packet loss, time 173091ms
+
+(base) [fanti@MICED748447 k-s-labormkt]$ htop
+(base) [fanti@MICED748447 k-s-labormkt]$ cd R
+(base) [fanti@MICED748447 R]$ cd sa_ee
+(base) [fanti@MICED748447 sa_ee]$ chmod +x sa-ee_1_780.
+sa-ee_1_780.csv  sa-ee_1_780.sh   
+(base) [fanti@MICED748447 sa_ee]$ chmod +x sa-ee_1_780.sh 
+(base) [fanti@MICED748447 sa_ee]$ cd ..
+(base) [fanti@MICED748447 R]$ cd sa_sobol
+(base) [fanti@MICED748447 sa_sobol]$ chmod +x sa-sobol_1_532.sh 
+(base) [fanti@MICED748447 sa_sobol]$ cd ../..
+(base) [fanti@MICED748447 k-s-labormkt]$ make -f makefileNW
+g++ -march=native -std=c++14 -w -Wall -Wno-unused-variable -Wno-unused-but-set-variable -Wno-maybe-uninitialized -O3 -D_NW_ -O3 -g0 -Isrc -I. -c fun_KS.cpp -o fun_KSNW.o
+g++ -march=native -std=c++14 -w -Wall -Wno-unused-variable -Wno-unused-but-set-variable -Wno-maybe-uninitialized -O3 -D_NW_ -O3 -g0 -Isrc -I. -c src/common.cpp -o src/common.o
+g++ -march=native -std=c++14 -w -Wall -Wno-unused-variable -Wno-unused-but-set-variable -Wno-maybe-uninitialized -O3 -D_NW_ -O3 -g0 -Isrc -I. -c src/lsdmain.cpp -o src/lsdmain.o
+g++ -march=native -std=c++14 -w -Wall -Wno-unused-variable -Wno-unused-but-set-variable -Wno-maybe-uninitialized -O3 -D_NW_ -O3 -g0 -Isrc -I. -c src/file.cpp -o src/file.o
+g++ -march=native -std=c++14 -w -Wall -Wno-unused-variable -Wno-unused-but-set-variable -Wno-maybe-uninitialized -O3 -D_NW_ -O3 -g0 -Isrc -I. -c src/nets.cpp -o src/nets.o
+g++ -march=native -std=c++14 -w -Wall -Wno-unused-variable -Wno-unused-but-set-variable -Wno-maybe-uninitialized -O3 -D_NW_ -O3 -g0 -Isrc -I. -c src/variab.cpp -o src/variab.o
+g++ -march=native -std=c++14 -w -Wall -Wno-unused-variable -Wno-unused-but-set-variable -Wno-maybe-uninitialized -O3 -D_NW_ -O3 -g0 fun_KSNW.o src/common.o \
+src/lsdmain.o src/file.o src/nets.o \
+src/object.o src/util.o src/variab.o \
+ -L. -lz -lpthread -lpthread -o lsdNW
+src/object.o: file not recognized: File format not recognized
+collect2: error: ld returned 1 exit status
+make: *** [makefileNW:51: lsdNW] Error 1
+(base) [fanti@MICED748447 k-s-labormkt]$ make -f makefileNW clean
+rm -f src/common.o src/lsdmain.o src/file.o src/nets.o \
+src/object.o src/util.o src/variab.o fun_KSNW.o \
+lsdNW lsdNW.exe
+(base) [fanti@MICED748447 k-s-labormkt]$ make -f makefileNW 
+g++ -march=native -std=c++14 -w -Wall -Wno-unused-variable -Wno-unused-but-set-variable -Wno-maybe-uninitialized -O3 -D_NW_ -O3 -g0 -Isrc -I. -c fun_KS.cpp -o fun_KSNW.o
+g++ -march=native -std=c++14 -w -Wall -Wno-unused-variable -Wno-unused-but-set-variable -Wno-maybe-uninitialized -O3 -D_NW_ -O3 -g0 -Isrc -I. -c src/common.cpp -o src/common.o
+g++ -march=native -std=c++14 -w -Wall -Wno-unused-variable -Wno-unused-but-set-variable -Wno-maybe-uninitialized -O3 -D_NW_ -O3 -g0 -Isrc -I. -c src/lsdmain.cpp -o src/lsdmain.o
+g++ -march=native -std=c++14 -w -Wall -Wno-unused-variable -Wno-unused-but-set-variable -Wno-maybe-uninitialized -O3 -D_NW_ -O3 -g0 -Isrc -I. -c src/file.cpp -o src/file.o
+g++ -march=native -std=c++14 -w -Wall -Wno-unused-variable -Wno-unused-but-set-variable -Wno-maybe-uninitialized -O3 -D_NW_ -O3 -g0 -Isrc -I. -c src/nets.cpp -o src/nets.o
+g++ -march=native -std=c++14 -w -Wall -Wno-unused-variable -Wno-unused-but-set-variable -Wno-maybe-uninitialized -O3 -D_NW_ -O3 -g0 -Isrc -I. -c src/object.cpp -o src/object.o
+g++ -march=native -std=c++14 -w -Wall -Wno-unused-variable -Wno-unused-but-set-variable -Wno-maybe-uninitialized -O3 -D_NW_ -O3 -g0 -Isrc -I. -c src/util.cpp -o src/util.o
+g++ -march=native -std=c++14 -w -Wall -Wno-unused-variable -Wno-unused-but-set-variable -Wno-maybe-uninitialized -O3 -D_NW_ -O3 -g0 -Isrc -I. -c src/variab.cpp -o src/variab.o
+g++ -march=native -std=c++14 -w -Wall -Wno-unused-variable -Wno-unused-but-set-variable -Wno-maybe-uninitialized -O3 -D_NW_ -O3 -g0 fun_KSNW.o src/common.o \
+src/lsdmain.o src/file.o src/nets.o \
+src/object.o src/util.o src/variab.o \
+ -L. -lz -lpthread -lpthread -o lsdNW
+(base) [fanti@MICED748447 k-s-labormkt]$ ./lsdNW
+
+No configuration to run.
+This is the No Window version of LSD.
+Command line options:
+'-f FILENAME.lsd [-s SEED] [-e RUNS] to run a single configuration file
+'-f FILE_BASE_NAME -s FIRST_NUM [-e LAST_NUM]' for batch sequential mode
+'-o PATH' to save result file(s) to a different subdirectory
+'-l FILENAME' to save all output to a (log) file
+'-t' to produce comma separated (.csv) text result file(s)
+'-r' for skipping the generation of intermediate result file(s)
+'-p' for skipping the generation of totals file
+'-g' for the generation of a single grand total file
+'-z' for preventing the generation of compressed result file(s)
+'-b' for showing a progress bar
+'-c MAX_THREADS[:MAX_RUNS]' to set maximum parallel threads/runs to use
+
+(base) [fanti@MICED748447 k-s-labormkt]$ cd R/sa_ee/
+(base) [fanti@MICED748447 sa_ee]$ ./sa-ee_1_780.sh 
+Processing 780 configuration files in up to 64 parallel processes...
+LSD executable: nice /Users/skrezia/LSD/Work/k-s-labormkt-new/lsdNW
+Configuration path: /Users/skrezia/LSD/Work/k-s-labormkt-new/R/sa_ee
+Use sa-ee.sh LSD_EXEC CONFIG_PATH to change default paths
+nice: ‘/Users/skrezia/LSD/Work/k-s-labormkt-new/lsdNW’: No such file or directory
+nice: ‘/Users/skrezia/LSD/Work/k-s-labormkt-new/lsdNW’nice: : No such file or directory‘/Users/skrezia/LSD/Work/k-s-labormkt-new/lsdNW’
+: No such file or directory
+nice: ‘/Users/skrezia/LSD/Work/k-s-labormkt-new/lsdNW’: No such file or directory
+nice: ‘/Users/skrezia/LSD/Work/k-s-labormkt-new/lsdNW’: No such file or directory
+nice: ‘/Users/skrezia/LSD/Work/k-s-labormkt-new/lsdNW’: No such file or directory
+nice: ‘/Users/skrezia/LSD/Work/k-s-labormkt-new/lsdNW’: No such file or directory
+nice: ‘/Users/skrezia/LSD/Work/k-s-labormkt-new/lsdNW’: No such file or directory
+nice: ‘/Users/skrezia/LSD/Work/k-s-labormkt-new/lsdNW’: No such file or directory
+nice: ‘/Users/skrezia/LSD/Work/k-s-labormkt-new/lsdNW’: No such file or directory
+nice: nice: ‘/Users/skrezia/LSD/Work/k-s-labormkt-new/lsdNW’‘/Users/skrezia/LSD/Work/k-s-labormkt-new/lsdNW’: No such file or directory: No such file or directory
+
+nice: ‘/Users/skrezia/LSD/Work/k-s-labormkt-new/lsdNW’: No such file or directory
+nice: ‘/Users/skrezia/LSD/Work/k-s-labormkt-new/lsdNW’: No such file or directory
+nice: ‘/Users/skrezia/LSD/Work/k-s-labormkt-new/lsdNW’: No such file or directory
+nice: ‘/Users/skrezia/LSD/Work/k-s-labormkt-new/lsdNW’: No such file or directory
+nice: ‘/Users/skrezia/LSD/Work/k-s-labormkt-new/lsdNW’: No such file or directory
+nice: ‘/Users/skrezia/LSD/Work/k-s-labormkt-new/lsdNW’: No such file or directory
+nice: ‘/Users/skrezia/LSD/Work/k-s-labormkt-new/lsdNW’: No such file or directory
+nice: ‘/Users/skrezia/LSD/Work/k-s-labormkt-new/lsdNW’: No such file or directory
+nice: ‘/Users/skrezia/LSD/Work/k-s-labormkt-new/lsdNW’: No such file or directory
+nice: ‘/Users/skrezia/LSD/Work/k-s-labormkt-new/lsdNW’: No such file or directory
+nice: ‘/Users/skrezia/LSD/Work/k-s-labormkt-new/lsdNW’: No such file or directory
+nice: ‘/Users/skrezia/LSD/Work/k-s-labormkt-new/lsdNW’: No such file or directory
+nice: ‘/Users/skrezia/LSD/Work/k-s-labormkt-new/lsdNW’: No such file or directory
+nice: ‘/Users/skrezia/LSD/Work/k-s-labormkt-new/lsdNW’: No such file or directory
+nice: nice: ‘/Users/skrezia/LSD/Work/k-s-labormkt-new/lsdNW’‘/Users/skrezia/LSD/Work/k-s-labormkt-new/lsdNW’: No such file or directory
+: No such file or directorynice: 
+‘/Users/skrezia/LSD/Work/k-s-labormkt-new/lsdNW’: No such file or directory
+nice: ‘/Users/skrezia/LSD/Work/k-s-labormkt-new/lsdNW’: No such file or directory
+nice: ‘/Users/skrezia/LSD/Work/k-s-labormkt-new/lsdNW’: No such file or directory
+nice: ‘/Users/skrezia/LSD/Work/k-s-labormkt-new/lsdNW’: No such file or directory
+nice: ‘/Users/skrezia/LSD/Work/k-s-labormkt-new/lsdNW’: No such file or directory
+nice: ‘/Users/skrezia/LSD/Work/k-s-labormkt-new/lsdNW’: No such file or directory
+nice: ‘/Users/skrezia/LSD/Work/k-s-labormkt-new/lsdNW’: No such file or directory
+nice: ‘/Users/skrezia/LSD/Work/k-s-labormkt-new/lsdNW’: No such file or directory
+nice: ‘/Users/skrezia/LSD/Work/k-s-labormkt-new/lsdNW’: No such file or directory
+nice: ‘/Users/skrezia/LSD/Work/k-s-labormkt-new/lsdNW’: No such file or directory
+nice: ‘/Users/skrezia/LSD/Work/k-s-labormkt-new/lsdNW’: No such file or directory
+nice: ‘/Users/skrezia/LSD/Work/k-s-labormkt-new/lsdNW’: No such file or directory
+nice: ‘/Users/skrezia/LSD/Work/k-s-labormkt-new/lsdNW’: No such file or directory
+nice: ‘/Users/skrezia/LSD/Work/k-s-labormkt-new/lsdNW’: No such file or directory
+nice: ‘/Users/skrezia/LSD/Work/k-s-labormkt-new/lsdNW’: No such file or directory
+nice: ‘/Users/skrezia/LSD/Work/k-s-labormkt-new/lsdNW’: No such file or directory
+nice: ‘/Users/skrezia/LSD/Work/k-s-labormkt-new/lsdNW’: No such file or directory
+nice: ‘/Users/skrezia/LSD/Work/k-s-labormkt-new/lsdNW’: No such file or directory
+nice: ‘/Users/skrezia/LSD/Work/k-s-labormkt-new/lsdNW’: No such file or directory
+nice: ‘/Users/skrezia/LSD/Work/k-s-labormkt-new/lsdNW’: No such file or directory
+nice: ‘/Users/skrezia/LSD/Work/k-s-labormkt-new/lsdNW’: No such file or directory
+nice: ‘/Users/skrezia/LSD/Work/k-s-labormkt-new/lsdNW’: No such file or directory
+nice: ‘/Users/skrezia/LSD/Work/k-s-labormkt-new/lsdNW’: No such file or directory
+nice: ‘/Users/skrezia/LSD/Work/k-s-labormkt-new/lsdNW’: No such file or directory
+nice: ‘/Users/skrezia/LSD/Work/k-s-labormkt-new/lsdNW’: No such file or directory
+nice: ‘/Users/skrezia/LSD/Work/k-s-labormkt-new/lsdNW’: No such file or directory
+nice: ‘/Users/skrezia/LSD/Work/k-s-labormkt-new/lsdNW’: No such file or directory
+nice: nice: ‘/Users/skrezia/LSD/Work/k-s-labormkt-new/lsdNW’‘/Users/skrezia/LSD/Work/k-s-labormkt-new/lsdNW’: No such file or directory
+: No such file or directory
+nice: ‘/Users/skrezia/LSD/Work/k-s-labormkt-new/lsdNW’: No such file or directory
+nice: ‘/Users/skrezia/LSD/Work/k-s-labormkt-new/lsdNW’: No such file or directory
+64 log files being generated: sa-ee_1.log to sa-ee_64.log .
+nice: ‘/Users/skrezia/LSD/Work/k-s-labormkt-new/lsdNW’: No such file or directory
+nice: ‘/Users/skrezia/LSD/Work/k-s-labormkt-new/lsdNW’: No such file or directory
+(base) [fanti@MICED748447 sa_ee]$ nice: ‘/Users/skrezia/LSD/Work/k-s-labormkt-new/lsdNW’: No such file or directory
+nice: ‘/Users/skrezia/LSD/Work/k-s-labormkt-new/lsdNW’: No such file or directory
+nice: ‘/Users/skrezia/LSD/Work/k-s-labormkt-new/lsdNW’: No such file or directory
+^C
+(base) [fanti@MICED748447 sa_ee]$ chmod +x sa-ee_1_780.sh 
+(base) [fanti@MICED748447 sa_ee]$ ./sa-ee_1_780.sh 
+Processing 780 configuration files in up to 64 parallel processes...
+LSD executable: nice /Users/skrezia/LSD/Work/k-s-labormkt/lsdNW
+Configuration path: /Users/skrezia/LSD/Work/k-s-labormkt/R/sa_ee
+Use sa-ee.sh LSD_EXEC CONFIG_PATH to change default paths
+nice: ‘/Users/skrezia/LSD/Work/k-s-labormkt/lsdNW’: No such file or directory
+nice: ‘/Users/skrezia/LSD/Work/k-s-labormkt/lsdNW’nice: : No such file or directory‘/Users/skrezia/LSD/Work/k-s-labormkt/lsdNW’
+: No such file or directory
+nice: ‘/Users/skrezia/LSD/Work/k-s-labormkt/lsdNW’: No such file or directory
+nice: ‘/Users/skrezia/LSD/Work/k-s-labormkt/lsdNW’: No such file or directory
+nice: nice: ‘/Users/skrezia/LSD/Work/k-s-labormkt/lsdNW’‘/Users/skrezia/LSD/Work/k-s-labormkt/lsdNW’: No such file or directory
+: No such file or directory
+nice: ‘/Users/skrezia/LSD/Work/k-s-labormkt/lsdNW’: No such file or directory
+nice: ‘/Users/skrezia/LSD/Work/k-s-labormkt/lsdNW’: No such file or directory
+nice: nice: ‘/Users/skrezia/LSD/Work/k-s-labormkt/lsdNW’‘/Users/skrezia/LSD/Work/k-s-labormkt/lsdNW’: No such file or directory
+: No such file or directory
+nice: ‘/Users/skrezia/LSD/Work/k-s-labormkt/lsdNW’: No such file or directory
+nice: ‘/Users/skrezia/LSD/Work/k-s-labormkt/lsdNW’: No such file or directory
+nice: ‘/Users/skrezia/LSD/Work/k-s-labormkt/lsdNW’: No such file or directory
+nice: ‘/Users/skrezia/LSD/Work/k-s-labormkt/lsdNW’: No such file or directory
+nice: ‘/Users/skrezia/LSD/Work/k-s-labormkt/lsdNW’: No such file or directory
+nice: ‘/Users/skrezia/LSD/Work/k-s-labormkt/lsdNW’: No such file or directory
+nice: nice: nice: ‘/Users/skrezia/LSD/Work/k-s-labormkt/lsdNW’‘/Users/skrezia/LSD/Work/k-s-labormkt/lsdNW’‘/Users/skrezia/LSD/Work/k-s-labormkt/lsdNW’: No such file or directory
+: No such file or directory
+: No such file or directory
+nice: ‘/Users/skrezia/LSD/Work/k-s-labormkt/lsdNW’: No such file or directory
+nice: ‘/Users/skrezia/LSD/Work/k-s-labormkt/lsdNW’: No such file or directory
+nice: ‘/Users/skrezia/LSD/Work/k-s-labormkt/lsdNW’: No such file or directory
+nice: ‘/Users/skrezia/LSD/Work/k-s-labormkt/lsdNW’: No such file or directory
+nice: ‘/Users/skrezia/LSD/Work/k-s-labormkt/lsdNW’: No such file or directory
+nice: ‘/Users/skrezia/LSD/Work/k-s-labormkt/lsdNW’: No such file or directory
+nice: ‘/Users/skrezia/LSD/Work/k-s-labormkt/lsdNW’: No such file or directory
+nice: ‘/Users/skrezia/LSD/Work/k-s-labormkt/lsdNW’: No such file or directory
+nice: ‘/Users/skrezia/LSD/Work/k-s-labormkt/lsdNW’: No such file or directory
+nice: ‘/Users/skrezia/LSD/Work/k-s-labormkt/lsdNW’: No such file or directory
+nice: ‘/Users/skrezia/LSD/Work/k-s-labormkt/lsdNW’: No such file or directory
+nice: ‘/Users/skrezia/LSD/Work/k-s-labormkt/lsdNW’: No such file or directory
+nice: ‘/Users/skrezia/LSD/Work/k-s-labormkt/lsdNW’: No such file or directory
+nice: ‘/Users/skrezia/LSD/Work/k-s-labormkt/lsdNW’: No such file or directory
+nice: ‘/Users/skrezia/LSD/Work/k-s-labormkt/lsdNW’: No such file or directory
+nice: ‘/Users/skrezia/LSD/Work/k-s-labormkt/lsdNW’: No such file or directory
+nice: ‘/Users/skrezia/LSD/Work/k-s-labormkt/lsdNW’: No such file or directory
+nice: ‘/Users/skrezia/LSD/Work/k-s-labormkt/lsdNW’: No such file or directory
+nice: ‘/Users/skrezia/LSD/Work/k-s-labormkt/lsdNW’: No such file or directory
+nice: ‘/Users/skrezia/LSD/Work/k-s-labormkt/lsdNW’: No such file or directory
+nice: ‘/Users/skrezia/LSD/Work/k-s-labormkt/lsdNW’: No such file or directory
+nice: ‘/Users/skrezia/LSD/Work/k-s-labormkt/lsdNW’: No such file or directory
+nice: ‘/Users/skrezia/LSD/Work/k-s-labormkt/lsdNW’: No such file or directory
+nice: ‘/Users/skrezia/LSD/Work/k-s-labormkt/lsdNW’: No such file or directory
+nice: ‘/Users/skrezia/LSD/Work/k-s-labormkt/lsdNW’: No such file or directory
+nice: ‘/Users/skrezia/LSD/Work/k-s-labormkt/lsdNW’: No such file or directory
+nice: ‘/Users/skrezia/LSD/Work/k-s-labormkt/lsdNW’: No such file or directory
+nice: ‘/Users/skrezia/LSD/Work/k-s-labormkt/lsdNW’: No such file or directory
+nice: ‘/Users/skrezia/LSD/Work/k-s-labormkt/lsdNW’: No such file or directory
+nice: ‘/Users/skrezia/LSD/Work/k-s-labormkt/lsdNW’: No such file or directory
+nice: ‘/Users/skrezia/LSD/Work/k-s-labormkt/lsdNW’: No such file or directory
+nice: ‘/Users/skrezia/LSD/Work/k-s-labormkt/lsdNW’: No such file or directory
+nice: ‘/Users/skrezia/LSD/Work/k-s-labormkt/lsdNW’: No such file or directory
+nice: ‘/Users/skrezia/LSD/Work/k-s-labormkt/lsdNW’: No such file or directory
+nice: ‘/Users/skrezia/LSD/Work/k-s-labormkt/lsdNW’: No such file or directory
+nice: ‘/Users/skrezia/LSD/Work/k-s-labormkt/lsdNW’: No such file or directory
+nice: ‘/Users/skrezia/LSD/Work/k-s-labormkt/lsdNW’: No such file or directory
+nice: ‘/Users/skrezia/LSD/Work/k-s-labormkt/lsdNW’: No such file or directory
+nice: ‘/Users/skrezia/LSD/Work/k-s-labormkt/lsdNW’: No such file or directory
+64 log files being generated: sa-ee_1.log to sa-ee_64.log .
+nice: ‘/Users/skrezia/LSD/Work/k-s-labormkt/lsdNW’: No such file or directory
+nice: ‘/Users/skrezia/LSD/Work/k-s-labormkt/lsdNW’: No such file or directory
+(base) [fanti@MICED748447 sa_ee]$ nice: ‘/Users/skrezia/LSD/Work/k-s-labormkt/lsdNW’: No such file or directory
+nice: ‘/Users/skrezia/LSD/Work/k-s-labormkt/lsdNW’: No such file or directory
+nice: ‘/Users/skrezia/LSD/Work/k-s-labormkt/lsdNW’: No such file or directory
+chmod +x sa-ee_1_780.sh ^C
+(base) [fanti@MICED748447 sa_ee]$ chmod +x sa-ee_1_780.sh 
+(base) [fanti@MICED748447 sa_ee]$ ./sa-ee_1_780.sh 
+Processing 780 configuration files in up to 64 parallel processes...
+LSD executable: nice /home/fanti/LSD/Work/k-s-labormkt/lsdNW
+Configuration path: /home/fanti/LSD/Work/k-s-labormkt/R/sa_ee
+Use sa-ee.sh LSD_EXEC CONFIG_PATH to change default paths
+64 log files being generated: sa-ee_1.log to sa-ee_64.log .
+(base) [fanti@MICED748447 sa_ee]$ htop
+(base) [fanti@MICED748447 sa_ee]$ htop
+(base) [fanti@MICED748447 sa_ee]$ cd ../..
+(base) [fanti@MICED748447 k-s-labormkt]$ make -f makefileNW 
+g++ -march=native -std=c++14 -w -Wall -Wno-unused-variable -Wno-unused-but-set-variable -Wno-maybe-uninitialized -O3 -D_NW_ -O3 -g0 -Isrc -I. -c fun_KS.cpp -o fun_KSNW.o
+g++ -march=native -std=c++14 -w -Wall -Wno-unused-variable -Wno-unused-but-set-variable -Wno-maybe-uninitialized -O3 -D_NW_ -O3 -g0 fun_KSNW.o src/common.o \
+src/lsdmain.o src/file.o src/nets.o \
+src/object.o src/util.o src/variab.o \
+ -L. -lz -lpthread -lpthread -o lsdNW
+(base) [fanti@MICED748447 k-s-labormkt]$ cd R/sa_ee/
+(base) [fanti@MICED748447 sa_ee]$ htop
+(base) [fanti@MICED748447 sa_ee]$ ./sa-ee_1_780.sh 
+Processing 780 configuration files in up to 64 parallel processes...
+LSD executable: nice /home/fanti/LSD/Work/k-s-labormkt/lsdNW
+Configuration path: /home/fanti/LSD/Work/k-s-labormkt/R/sa_ee
+Use sa-ee.sh LSD_EXEC CONFIG_PATH to change default paths
+64 log files being generated: sa-ee_1.log to sa-ee_64.log .
+(base) [fanti@MICED748447 sa_ee]$ htop
+(base) [fanti@MICED748447 sa_ee]$ 

@@ -1,0 +1,10 @@
+# LSD options
+TARGET=LSD
+FUN=fun_KS
+
+# Additional model files
+FUN_EXTRA=fun_KS_class.h fun_KS_world.h fun_KS_country.h fun_KS_financial.h fun_KS_capital.h fun_KS_consumption.h fun_KS_labor.h fun_KS_bank.h fun_KS_firm1.h fun_KS_firm2.h fun_KS_worker.h fun_KS_stats.h fun_KS_support.h fun_KS_test.h fun_KS_vintage.h
+
+# Compiler options
+SWITCH_CC=-Wall -Wno-unused-variable -Wno-unused-but-set-variable -Wno-maybe-uninitialized -O3
+SWITCH_CC_LNK=

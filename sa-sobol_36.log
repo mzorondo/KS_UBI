@@ -1,0 +1,338 @@
+
+Processing configuration file sa-sobol_301.lsd...
+
+Simulation 1 of 5 running (seed=1501)...
+ Optional statistics being computed in object 'Stats' for country 1
+ Optional statistics being computed in object 'Stats' for country 2
+ Regime changed (t=100) at country 1
+ Regime changed (t=100) at country 2
+Simulation 1 of 5 finished at case 400 (297.71 sec.)
+Saving results to file /home/fanti/LSD/Work/k-s-labormkt/R/sa_sobol/sa-sobol_301_1501.res.gz... Done
+
+Simulation 2 of 5 running (seed=1502)...
+ Optional statistics being computed in object 'Stats' for country 1
+ Optional statistics being computed in object 'Stats' for country 2
+ Regime changed (t=100) at country 1
+ Regime changed (t=100) at country 2
+Simulation 2 of 5 finished at case 400 (294.63 sec.)
+Saving results to file /home/fanti/LSD/Work/k-s-labormkt/R/sa_sobol/sa-sobol_301_1502.res.gz... Done
+
+Simulation 3 of 5 running (seed=1503)...
+ Optional statistics being computed in object 'Stats' for country 1
+ Optional statistics being computed in object 'Stats' for country 2
+ Regime changed (t=100) at country 1
+ Regime changed (t=100) at country 2
+Simulation 3 of 5 finished at case 400 (279.98 sec.)
+Saving results to file /home/fanti/LSD/Work/k-s-labormkt/R/sa_sobol/sa-sobol_301_1503.res.gz... Done
+
+Simulation 4 of 5 running (seed=1504)...
+ Optional statistics being computed in object 'Stats' for country 1
+ Optional statistics being computed in object 'Stats' for country 2
+ Regime changed (t=100) at country 1
+ Regime changed (t=100) at country 2
+Simulation 4 of 5 finished at case 400 (285.39 sec.)
+Saving results to file /home/fanti/LSD/Work/k-s-labormkt/R/sa_sobol/sa-sobol_301_1504.res.gz... Done
+
+Simulation 5 of 5 running (seed=1505)...
+ Optional statistics being computed in object 'Stats' for country 1
+ Optional statistics being computed in object 'Stats' for country 2
+ Regime changed (t=100) at country 1
+ Regime changed (t=100) at country 2
+Simulation 5 of 5 finished at case 400 (290.08 sec.)
+Saving results to file /home/fanti/LSD/Work/k-s-labormkt/R/sa_sobol/sa-sobol_301_1505.res.gz... Done
+
+Processing configuration file sa-sobol_302.lsd...
+
+Simulation 1 of 5 running (seed=1506)...
+ Optional statistics being computed in object 'Stats' for country 1
+ Optional statistics being computed in object 'Stats' for country 2
+ Regime changed (t=100) at country 1
+ Regime changed (t=100) at country 2
+Simulation 1 of 5 finished at case 400 (568.77 sec.)
+Saving results to file /home/fanti/LSD/Work/k-s-labormkt/R/sa_sobol/sa-sobol_302_1506.res.gz... Done
+
+Simulation 2 of 5 running (seed=1507)...
+ Optional statistics being computed in object 'Stats' for country 1
+ Optional statistics being computed in object 'Stats' for country 2
+ Regime changed (t=100) at country 1
+ Regime changed (t=100) at country 2
+Simulation 2 of 5 finished at case 400 (580.11 sec.)
+Saving results to file /home/fanti/LSD/Work/k-s-labormkt/R/sa_sobol/sa-sobol_302_1507.res.gz... Done
+
+Simulation 3 of 5 running (seed=1508)...
+ Optional statistics being computed in object 'Stats' for country 1
+ Optional statistics being computed in object 'Stats' for country 2
+ Regime changed (t=100) at country 1
+ Regime changed (t=100) at country 2
+Simulation 3 of 5 finished at case 400 (587.74 sec.)
+Saving results to file /home/fanti/LSD/Work/k-s-labormkt/R/sa_sobol/sa-sobol_302_1508.res.gz... Done
+
+Simulation 4 of 5 running (seed=1509)...
+ Optional statistics being computed in object 'Stats' for country 1
+ Optional statistics being computed in object 'Stats' for country 2
+ Regime changed (t=100) at country 1
+ Regime changed (t=100) at country 2
+Simulation 4 of 5 finished at case 400 (648.46 sec.)
+Saving results to file /home/fanti/LSD/Work/k-s-labormkt/R/sa_sobol/sa-sobol_302_1509.res.gz... Done
+
+Simulation 5 of 5 running (seed=1510)...
+ Optional statistics being computed in object 'Stats' for country 1
+ Optional statistics being computed in object 'Stats' for country 2
+ Regime changed (t=100) at country 1
+ Regime changed (t=100) at country 2
+Simulation 5 of 5 finished at case 400 (598.14 sec.)
+Saving results to file /home/fanti/LSD/Work/k-s-labormkt/R/sa_sobol/sa-sobol_302_1510.res.gz... Done
+
+Processing configuration file sa-sobol_303.lsd...
+
+Simulation 1 of 5 running (seed=1511)...
+ Optional statistics being computed in object 'Stats' for country 1
+ Optional statistics being computed in object 'Stats' for country 2
+ Regime changed (t=100) at country 1
+ Regime changed (t=100) at country 2
+Simulation 1 of 5 finished at case 400 (656.02 sec.)
+Saving results to file /home/fanti/LSD/Work/k-s-labormkt/R/sa_sobol/sa-sobol_303_1511.res.gz... Done
+
+Simulation 2 of 5 running (seed=1512)...
+ Optional statistics being computed in object 'Stats' for country 1
+ Optional statistics being computed in object 'Stats' for country 2
+ Regime changed (t=100) at country 1
+ Regime changed (t=100) at country 2
+Simulation 2 of 5 finished at case 400 (605.47 sec.)
+Saving results to file /home/fanti/LSD/Work/k-s-labormkt/R/sa_sobol/sa-sobol_303_1512.res.gz... Done
+
+Simulation 3 of 5 running (seed=1513)...
+ Optional statistics being computed in object 'Stats' for country 1
+ Optional statistics being computed in object 'Stats' for country 2
+ Regime changed (t=100) at country 1
+ Regime changed (t=100) at country 2
+Simulation 3 of 5 finished at case 400 (598.79 sec.)
+Saving results to file /home/fanti/LSD/Work/k-s-labormkt/R/sa_sobol/sa-sobol_303_1513.res.gz... Done
+
+Simulation 4 of 5 running (seed=1514)...
+ Optional statistics being computed in object 'Stats' for country 1
+ Optional statistics being computed in object 'Stats' for country 2
+ Regime changed (t=100) at country 1
+ Regime changed (t=100) at country 2
+Simulation 4 of 5 finished at case 400 (601.57 sec.)
+Saving results to file /home/fanti/LSD/Work/k-s-labormkt/R/sa_sobol/sa-sobol_303_1514.res.gz... Done
+
+Simulation 5 of 5 running (seed=1515)...
+ Optional statistics being computed in object 'Stats' for country 1
+ Optional statistics being computed in object 'Stats' for country 2
+ Regime changed (t=100) at country 1
+ Regime changed (t=100) at country 2
+Simulation 5 of 5 finished at case 400 (595.70 sec.)
+Saving results to file /home/fanti/LSD/Work/k-s-labormkt/R/sa_sobol/sa-sobol_303_1515.res.gz... Done
+
+Processing configuration file sa-sobol_304.lsd...
+
+Simulation 1 of 5 running (seed=1516)...
+ Optional statistics being computed in object 'Stats' for country 1
+ Optional statistics being computed in object 'Stats' for country 2
+ Regime changed (t=100) at country 1
+ Regime changed (t=100) at country 2
+Simulation 1 of 5 finished at case 400 (475.75 sec.)
+Saving results to file /home/fanti/LSD/Work/k-s-labormkt/R/sa_sobol/sa-sobol_304_1516.res.gz... Done
+
+Simulation 2 of 5 running (seed=1517)...
+ Optional statistics being computed in object 'Stats' for country 1
+ Optional statistics being computed in object 'Stats' for country 2
+ Regime changed (t=100) at country 1
+ Regime changed (t=100) at country 2
+Simulation 2 of 5 finished at case 400 (506.10 sec.)
+Saving results to file /home/fanti/LSD/Work/k-s-labormkt/R/sa_sobol/sa-sobol_304_1517.res.gz... Done
+
+Simulation 3 of 5 running (seed=1518)...
+ Optional statistics being computed in object 'Stats' for country 1
+ Optional statistics being computed in object 'Stats' for country 2
+ Regime changed (t=100) at country 1
+ Regime changed (t=100) at country 2
+Simulation 3 of 5 finished at case 400 (500.97 sec.)
+Saving results to file /home/fanti/LSD/Work/k-s-labormkt/R/sa_sobol/sa-sobol_304_1518.res.gz... Done
+
+Simulation 4 of 5 running (seed=1519)...
+ Optional statistics being computed in object 'Stats' for country 1
+ Optional statistics being computed in object 'Stats' for country 2
+ Regime changed (t=100) at country 1
+ Regime changed (t=100) at country 2
+Simulation 4 of 5 finished at case 400 (482.62 sec.)
+Saving results to file /home/fanti/LSD/Work/k-s-labormkt/R/sa_sobol/sa-sobol_304_1519.res.gz... Done
+
+Simulation 5 of 5 running (seed=1520)...
+ Optional statistics being computed in object 'Stats' for country 1
+ Optional statistics being computed in object 'Stats' for country 2
+ Regime changed (t=100) at country 1
+ Regime changed (t=100) at country 2
+Simulation 5 of 5 finished at case 400 (480.91 sec.)
+Saving results to file /home/fanti/LSD/Work/k-s-labormkt/R/sa_sobol/sa-sobol_304_1520.res.gz... Done
+
+Processing configuration file sa-sobol_305.lsd...
+
+Simulation 1 of 5 running (seed=1521)...
+ Optional statistics being computed in object 'Stats' for country 1
+ Optional statistics being computed in object 'Stats' for country 2
+ Regime changed (t=100) at country 1
+ Regime changed (t=100) at country 2
+Simulation 1 of 5 finished at case 400 (720.71 sec.)
+Saving results to file /home/fanti/LSD/Work/k-s-labormkt/R/sa_sobol/sa-sobol_305_1521.res.gz... Done
+
+Simulation 2 of 5 running (seed=1522)...
+ Optional statistics being computed in object 'Stats' for country 1
+ Optional statistics being computed in object 'Stats' for country 2
+ Regime changed (t=100) at country 1
+ Regime changed (t=100) at country 2
+Simulation 2 of 5 finished at case 400 (707.56 sec.)
+Saving results to file /home/fanti/LSD/Work/k-s-labormkt/R/sa_sobol/sa-sobol_305_1522.res.gz... Done
+
+Simulation 3 of 5 running (seed=1523)...
+ Optional statistics being computed in object 'Stats' for country 1
+ Optional statistics being computed in object 'Stats' for country 2
+ Regime changed (t=100) at country 1
+ Regime changed (t=100) at country 2
+Simulation 3 of 5 finished at case 400 (714.92 sec.)
+Saving results to file /home/fanti/LSD/Work/k-s-labormkt/R/sa_sobol/sa-sobol_305_1523.res.gz... Done
+
+Simulation 4 of 5 running (seed=1524)...
+ Optional statistics being computed in object 'Stats' for country 1
+ Optional statistics being computed in object 'Stats' for country 2
+ Regime changed (t=100) at country 1
+ Regime changed (t=100) at country 2
+Simulation 4 of 5 finished at case 400 (711.96 sec.)
+Saving results to file /home/fanti/LSD/Work/k-s-labormkt/R/sa_sobol/sa-sobol_305_1524.res.gz... Done
+
+Simulation 5 of 5 running (seed=1525)...
+ Optional statistics being computed in object 'Stats' for country 1
+ Optional statistics being computed in object 'Stats' for country 2
+ Regime changed (t=100) at country 1
+ Regime changed (t=100) at country 2
+Simulation 5 of 5 finished at case 400 (712.69 sec.)
+Saving results to file /home/fanti/LSD/Work/k-s-labormkt/R/sa_sobol/sa-sobol_305_1525.res.gz... Done
+
+Processing configuration file sa-sobol_306.lsd...
+
+Simulation 1 of 5 running (seed=1526)...
+ Optional statistics being computed in object 'Stats' for country 1
+ Optional statistics being computed in object 'Stats' for country 2
+ Regime changed (t=100) at country 1
+ Regime changed (t=100) at country 2
+Simulation 1 of 5 finished at case 400 (644.16 sec.)
+Saving results to file /home/fanti/LSD/Work/k-s-labormkt/R/sa_sobol/sa-sobol_306_1526.res.gz... Done
+
+Simulation 2 of 5 running (seed=1527)...
+ Optional statistics being computed in object 'Stats' for country 1
+ Optional statistics being computed in object 'Stats' for country 2
+ Regime changed (t=100) at country 1
+ Regime changed (t=100) at country 2
+Simulation 2 of 5 finished at case 400 (615.85 sec.)
+Saving results to file /home/fanti/LSD/Work/k-s-labormkt/R/sa_sobol/sa-sobol_306_1527.res.gz... Done
+
+Simulation 3 of 5 running (seed=1528)...
+ Optional statistics being computed in object 'Stats' for country 1
+ Optional statistics being computed in object 'Stats' for country 2
+ Regime changed (t=100) at country 1
+ Regime changed (t=100) at country 2
+Simulation 3 of 5 finished at case 400 (673.55 sec.)
+Saving results to file /home/fanti/LSD/Work/k-s-labormkt/R/sa_sobol/sa-sobol_306_1528.res.gz... Done
+
+Simulation 4 of 5 running (seed=1529)...
+ Optional statistics being computed in object 'Stats' for country 1
+ Optional statistics being computed in object 'Stats' for country 2
+ Regime changed (t=100) at country 1
+ Regime changed (t=100) at country 2
+Simulation 4 of 5 finished at case 400 (672.35 sec.)
+Saving results to file /home/fanti/LSD/Work/k-s-labormkt/R/sa_sobol/sa-sobol_306_1529.res.gz... Done
+
+Simulation 5 of 5 running (seed=1530)...
+ Optional statistics being computed in object 'Stats' for country 1
+ Optional statistics being computed in object 'Stats' for country 2
+ Regime changed (t=100) at country 1
+ Regime changed (t=100) at country 2
+Simulation 5 of 5 finished at case 400 (636.37 sec.)
+Saving results to file /home/fanti/LSD/Work/k-s-labormkt/R/sa_sobol/sa-sobol_306_1530.res.gz... Done
+
+Processing configuration file sa-sobol_307.lsd...
+
+Simulation 1 of 5 running (seed=1531)...
+ Optional statistics being computed in object 'Stats' for country 1
+ Optional statistics being computed in object 'Stats' for country 2
+ Regime changed (t=100) at country 1
+ Regime changed (t=100) at country 2
+Simulation 1 of 5 finished at case 400 (263.60 sec.)
+Saving results to file /home/fanti/LSD/Work/k-s-labormkt/R/sa_sobol/sa-sobol_307_1531.res.gz... Done
+
+Simulation 2 of 5 running (seed=1532)...
+ Optional statistics being computed in object 'Stats' for country 1
+ Optional statistics being computed in object 'Stats' for country 2
+ Regime changed (t=100) at country 1
+ Regime changed (t=100) at country 2
+Simulation 2 of 5 finished at case 400 (261.58 sec.)
+Saving results to file /home/fanti/LSD/Work/k-s-labormkt/R/sa_sobol/sa-sobol_307_1532.res.gz... Done
+
+Simulation 3 of 5 running (seed=1533)...
+ Optional statistics being computed in object 'Stats' for country 1
+ Optional statistics being computed in object 'Stats' for country 2
+ Regime changed (t=100) at country 1
+ Regime changed (t=100) at country 2
+Simulation 3 of 5 finished at case 400 (255.93 sec.)
+Saving results to file /home/fanti/LSD/Work/k-s-labormkt/R/sa_sobol/sa-sobol_307_1533.res.gz... Done
+
+Simulation 4 of 5 running (seed=1534)...
+ Optional statistics being computed in object 'Stats' for country 1
+ Optional statistics being computed in object 'Stats' for country 2
+ Regime changed (t=100) at country 1
+ Regime changed (t=100) at country 2
+Simulation 4 of 5 finished at case 400 (259.86 sec.)
+Saving results to file /home/fanti/LSD/Work/k-s-labormkt/R/sa_sobol/sa-sobol_307_1534.res.gz... Done
+
+Simulation 5 of 5 running (seed=1535)...
+ Optional statistics being computed in object 'Stats' for country 1
+ Optional statistics being computed in object 'Stats' for country 2
+ Regime changed (t=100) at country 1
+ Regime changed (t=100) at country 2
+Simulation 5 of 5 finished at case 400 (261.42 sec.)
+Saving results to file /home/fanti/LSD/Work/k-s-labormkt/R/sa_sobol/sa-sobol_307_1535.res.gz... Done
+
+Processing configuration file sa-sobol_308.lsd...
+
+Simulation 1 of 5 running (seed=1536)...
+ Optional statistics being computed in object 'Stats' for country 1
+ Optional statistics being computed in object 'Stats' for country 2
+ Regime changed (t=100) at country 1
+ Regime changed (t=100) at country 2
+Simulation 1 of 5 finished at case 400 (374.32 sec.)
+Saving results to file /home/fanti/LSD/Work/k-s-labormkt/R/sa_sobol/sa-sobol_308_1536.res.gz... Done
+
+Simulation 2 of 5 running (seed=1537)...
+ Optional statistics being computed in object 'Stats' for country 1
+ Optional statistics being computed in object 'Stats' for country 2
+ Regime changed (t=100) at country 1
+ Regime changed (t=100) at country 2
+Simulation 2 of 5 finished at case 400 (392.56 sec.)
+Saving results to file /home/fanti/LSD/Work/k-s-labormkt/R/sa_sobol/sa-sobol_308_1537.res.gz... Done
+
+Simulation 3 of 5 running (seed=1538)...
+ Optional statistics being computed in object 'Stats' for country 1
+ Optional statistics being computed in object 'Stats' for country 2
+ Regime changed (t=100) at country 1
+ Regime changed (t=100) at country 2
+Simulation 3 of 5 finished at case 400 (381.56 sec.)
+Saving results to file /home/fanti/LSD/Work/k-s-labormkt/R/sa_sobol/sa-sobol_308_1538.res.gz... Done
+
+Simulation 4 of 5 running (seed=1539)...
+ Optional statistics being computed in object 'Stats' for country 1
+ Optional statistics being computed in object 'Stats' for country 2
+ Regime changed (t=100) at country 1
+ Regime changed (t=100) at country 2
+Simulation 4 of 5 finished at case 400 (379.67 sec.)
+Saving results to file /home/fanti/LSD/Work/k-s-labormkt/R/sa_sobol/sa-sobol_308_1539.res.gz... Done
+
+Simulation 5 of 5 running (seed=1540)...
+ Optional statistics being computed in object 'Stats' for country 1
+ Optional statistics being computed in object 'Stats' for country 2
+ Regime changed (t=100) at country 1
+ Regime changed (t=100) at country 2
+Simulation 5 of 5 finished at case 400 (384.41 sec.)
+Saving results to file /home/fanti/LSD/Work/k-s-labormkt/R/sa_sobol/sa-sobol_308_1540.res.gz... Done
+
+Finished processing sa-sobol_309.lsd

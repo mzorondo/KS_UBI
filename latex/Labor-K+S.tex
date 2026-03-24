@@ -1,0 +1,1049 @@
+\documentclass[a4paper,11pt]{article}
+
+%\usepackage[left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm]{geometry}
+\usepackage[big]{layaureo}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{ae,aecompl}
+\usepackage{enumerate}
+\usepackage{tikz}
+\usepackage[font=small,labelfont=bf]{caption}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{authblk}
+\usepackage[toc,page]{appendix}
+\usepackage{mathtools}
+\usepackage{amsthm}
+\usepackage{multicol}
+\usepackage{tabulary}
+\usepackage{abraces}
+\usepackage{natbib}
+\usepackage{csvsimple}
+\usepackage{subfig}
+\usepackage{rotating}
+\usepackage{pgfplots}
+\usepackage{pgfplotstable}
+\usepackage{siunitx}
+\usepackage{caption}
+\usepackage{cases}
+\usepackage[export]{adjustbox}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{pdflscape}
+\usepackage{lipsum}
+\usepackage{accents}
+\usepackage{palatino}
+\usepackage[babel]{csquotes}
+\usepackage{nextpage}
+\usepackage{emptypage}
+\usepackage[english]{varioref}
+\usepackage[pdftex]{hyperref}
+\usepackage{enumitem}
+%\usepackage{setspace}
+%\usepackage{draftwatermark}
+%\usepackage{mathpazo}
+
+\tolerance 1414
+\hbadness 1900
+\emergencystretch 1.5em
+\hfuzz 0.3pt
+\widowpenalty=10000
+\vfuzz \hfuzz
+\raggedbottom
+\let\tmp\oddsidemargin
+\let\oddsidemargin\evensidemargin
+\let\evensidemargin\tmp
+\reversemarginpar
+%\onehalfspacing
+
+\setlist{nosep}
+\usetikzlibrary{arrows,arrows.meta}
+\pgfplotsset{compat=1.14}
+\hypersetup{colorlinks,linkcolor=black,citecolor=blue,urlcolor=blue}
+\bibliographystyle{chicago}
+\bibpunct{(}{)}{;}{a}{,}{,}
+
+\DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
+\DeclareMathOperator{\Tr}{Tr}
+
+\newtheorem{prof}{Proof}
+\newtheorem{teore}{Assumption}
+\newtheorem{defin}{Proposition}
+\newtheorem{rem}{Remark}
+
+\newcommand\munderbar[1]{%
+	\underaccent{\bar}{#1}}
+
+\newenvironment{system}
+{\left\lbrace\begin{array}{@{}l@{}}}%
+{\end{array}\right.}
+\linespread{1.1}
+
+\newenvironment{citazione}
+{\begin{quote}\slshape\small}
+{\end{quote}}
+
+
+\title{K+S Labour Model Description}
+\author{Marcelo C. Pereira}
+\date{Version 5.3.1}
+
+\begin{document}
+
+\maketitle
+
+\section{The model}
+\label{Section:model}
+
+We build a \emph{general disequilibrium}, stock-and-flow consistent, agent-based model, populated by heterogeneous workers, firms, and banks, organized in different sectors and countries, which behave according to bounded-rational rules. More specifically, we extend the ``Schumpeter meeting Keynes'' (K+S) model \citep{dosi2010schumpeter} by (i) decentralizing and enriching the interactions among firms and workers, (ii) adding a more sophisticated financial sector, and (iii) introducing multiple trading countries. The model set-up allows for the simultaneous analysis of the macro and microeconomic dynamics, including the endogenous growth paths of productivity and GDP.
+
+In brief, the three-sector national economy in K+S model is composed by four populations of heterogeneous agents, namely, $L_t^S$ workers/consumers, $F_t^1$ capital-good firms, $F_t^2$ consumption-good firms, and $B$ banks, plus the central bank and the government. The agents are organized in one or more countries.\footnote{Subscript $t$ stands for (discrete) time $t=1,2,...,T$. Agent-specific variables are denoted by subscript $i$, for capital-good firms, $j$, for consumption-good firms, $k$, for banks, and $\ell$, for workers. Countries are tagged by $y$ only when required.} The basic structure of the model is depicted in Figure \ref{Figure1}.
+
+\begin{figure}[!htbp]
+	\begin{center}
+		\tikzstyle{block} = [rectangle, fill=blue!10, align=center, draw, text width=6em, text centered, rounded corners, minimum height=4em]
+		\tikzstyle{line} = [draw, -{Stealth[scale=1]}]
+		\begin{tikzpicture}
+		\node [block, text width=7.5em, minimum height=3.5em] (kgfirms) {\textbf{Capital-good firms}};
+		\node [block, below of=kgfirms, node distance=2.25cm, text width=7.5em, minimum height=3.5em] (banks) {\textbf{Banks}};
+		\node [block, left of=banks, node distance=4cm, text width=7.5em, minimum height=3.5em] (gov) {\textbf{Government \&\\Central Bank}};
+		\node [block, left of=gov, node distance=4cm, text width=7.5em, minimum height=3.5em] (workers) {\textbf{Workers}};
+		\node [block, right of=banks, node distance=4cm, yshift=1cm, text width=7.5em, minimum height=3.5em] (machmkt) {Machine market};
+		\node [block, below of=banks, node distance=2.25cm, text width=7.5em, minimum height=3.5em] (cgfirms) {\textbf{Consumption-good firms}};
+		\node [block, below of=cgfirms, node distance=2.25cm, text width=7.5em, minimum height=3.5em] (goodmkt) {Goods market};
+		\node [block, right of=goodmkt, node distance=4cm, yshift=1.3cm, text width=7.5em, minimum height=3.5em] (intmkt) {International markets};
+		\path [line] (kgfirms) -| (machmkt);
+		\path [line] (workers) |- ([yshift=0.5cm]kgfirms);
+		\path [line] ([yshift=0.5cm]kgfirms) -| (workers);
+		\path [line] ([yshift=-0.5cm]kgfirms) -| (gov);
+		\path [line] (gov) |- ([yshift=-0.5cm]kgfirms);
+		\path [line] (banks) -- (kgfirms);
+		\path [line] ([yshift=-0.5cm]cgfirms) -| (workers);
+		\path [line] (workers) |- ([yshift=-0.5cm]cgfirms);
+		\path [line] ([xshift=-1.5cm]machmkt) |- ([yshift=0.5cm]cgfirms);
+		\path [line] (machmkt) -- (intmkt);
+		\path [line] (intmkt) -- (machmkt);
+		\path [line] (cgfirms) -- (goodmkt);
+		\path [line] (goodmkt) -| ([xshift=-2cm]workers);
+		\path [line] (goodmkt) -| (intmkt);
+		\path [line] (intmkt) |- (goodmkt);
+		\path [line] ([yshift=0.5cm]cgfirms) -| (gov);
+		\path [line] (gov) |- ([yshift=0.5cm]cgfirms);
+		\path [line] (gov) -- (workers);
+		\path [line] (banks) -- (cgfirms);
+		\path [line] (gov) -- (banks);
+		\path [line] (banks) -- (gov);
+		\end{tikzpicture}
+	\end{center}
+	\caption{The model structure for a single country. Boxes in bold style represent the model's agents.}
+	\label{Figure1}
+\end{figure}
+
+Capital-good firms invest in R\&D and produce heterogeneous machine-tools whose stochastic productivity evolves endogenously over time. Consumption-good firms combine machines bought from capital-good firms and labour in order to produce a industry-homogeneous, quality-differentiated good for consumers. The banking sector is represented by a fixed number of banks which take deposits and provide interest-paying loans to finance firms' production and investment plans. Workers search for jobs, and firms hire labour according to their individual demand expectation. The central bank manages the monetary policy, imposes regulatory reserves to the banks, and bails out the failing ones. The government levies taxes on firm/bank profits, worker income, and imports, and pays unemployment benefits, provides education, may own firms, offers training for the unemployed, consumes goods, imposes a minimum wage, absorbs excess profits and losses from the central bank, and keeps a non-explosive public debt trajectory in the long run.
+
+Countries trade capital and consumption goods. Machine producers send brochures to potential clients worldwide, and consumption-good firms choose suppliers from the brochures received. Countries compete on the consumption-good world market, and the export shares (imperfectly) evolve based on a replicator dynamics: more (price and quality) competitive countries export more, and conversely. International prices are affected by (relative) nominal exchange rates which evolve according to countries' trade balances. Currencies are fully convertible and excess supplies are hold by central banks. Exports incur in transaction costs/taxes. There is no international flow of labour or finance.
+
+Firms in both real sectors hold a fixed relationship with a (randomly-chosen) single bank. Banks are heterogeneous under an asymmetric size distribution. Banks take deposits from firms (net wealth) and workers (savings) and pay interest. On request, banks evaluate the provision of loans to firms bounded by each bank's capital and Basel-type regulatory capital-adequacy constraints. Available (limited) credit is allocated by each bank according to a pecking order whereby demanding clients are ranked by credit score. Firm limits are based on ownership (private or government), past sales performance, according to a loan-to-value ratio rule, and a score based on clients' relative solvency index. Total credit supply by the financial sector is elastic and unconstrained by the aggregate supply side, adapting to credit demand and prudential requirements. Credit-rationed firms are not able to fully accomplish their investment and/or production plans.
+
+The capital-good sector is the locus of endogenous innovation in the model. Capital-good firms develop new machine-embodied techniques (innovation) or imitate the ones of their (worldwide) technologically-closer competitors in order to produce and sell more productive and cheaper machinery. Innovation is ``incremental'', gradually increasing existing technologies' productivity both on new machine construction and usage. On demand, vertically-integrated capital-good firms supply universal-application machine-tools to consumption-good firms in all countries, producing with labour as the only input. Firms have access to bank loans to cover liquidity requirements (up to a limit). The capital-good market is characterized by imperfect information and Schumpeterian competition driven by technological innovation. Firms signal the price and productivity of machines to their current worldwide customers as well to a subset of potential new ones, and invest a fraction of past revenues in R\&D aimed at searching for better machines or copy existing ones from other firms. Prices are set using a fixed mark-up over (labour) costs of production.
+
+Consumption-good firms produce a single, quality-differentiated good, employing capital and labour under constant returns to scale. The physical capital stock is composed by a set of machine-tool ``vintages'' characterized by different labour productivities. Desired production is determined according to adaptive (myopic) demand expectations. Given the actual inventories, if the current capital stock is insufficient to produce the desired output, firms try to order new machines to expand the installed capacity, paying in advance — drawing on their retained past profits or, up to some limits, on bank loans. Moreover, they replace existing machines according to a payback-period rule. As new capital embeds state-of-the-art technologies, the labour productivity of consumption-good firms increases over time according to the mix of (employed) vintages. Firms choose the capital-good supplier comparing the price and the productivity of machines they are aware of. Firms fix prices applying a variable mark-up rule on their (labour) production costs, balancing profit margins and market shares, increasing mark-ups and prices whenever market shares are expanding and vice versa. Imperfect information is also the normal state of the consumption-good market, so consumers do not instantaneously switch to the most competitive producer. Market shares evolve according to a (quasi) replicator dynamics: the more competitive firms expand, while the ones with relatively lower competitiveness levels shrink, or exit the market. Competitiveness is derived from individual price, unfilled demand and product quality.
+
+The process of firm entry-exit is endogenous in both industrial sectors. Firms leave whenever market shares get close to zero or (total) net assets turn negative (bankruptcy). Residual (positive) net values are returned to shareholders, and negative proceedings are supported by the defaulted banks, in case of private firms, or by the government, otherwise. Conversely, the (stochastic) number of entrant firms depends on the number of incumbents and on the prevailing financial conditions. When the sectoral liquidity-to-debt ratio is growing, new firm entry gets easier, and vice versa. Entrant firms may finance entry through bank finance, or by issuing stock to be acquired by private shareholders (workers), or by mixing the two modes.
+
+When very productive or large firms exit because of bankruptcy, in both sectors, there is a possibility of the government rescuing firms, and taking their property (statization). Government-owned firms behave mostly like other firms except for a few parameters: a higher credit limit, increased propensity to R\&D, more ``patience'' to recover investment, additional slack when expanding capital, and differentiated labuor education mix, wage premiums, and hiring/firing strategies. In the case of capital-good firms, they also have one-time access to (almost) the technology frontier, only immediately after statization. Government-owned firms exit the market as private firms, but the government repays any outstanding debt.
+
+The labour market is modelled as a fully decentralized, search-and-match process between workers and firms. For simplicity, banks, the central bank and the government occupy no workers. The aggregate supply of labour may be fixed or not, and all workers are available to be hired in any period at each country. Workers present different education levels, affecting firms' productivities. Workers may develop learn-by-using (machine operation) vintage skills, learning-by-doing (on-the-job) tenure skills, or both. Unemployed workers may get government-supplied training to preserve/update skills.
+
+When unemployed, workers submit a certain number of job applications to a random subset of domestic firms. Employed workers may apply or not for better positions, according to the institutional set-up. Larger firms have a proportionally higher probability of receiving job applications, which are organized in separated, firm-specific application queues. The labour market is characterized by imperfect information as firms only observe workers' education, skills and wage requests on their own queues, and workers are aware only of the wage offers they may receive from firms where they applied for a job.
+
+Firms, on the grounds of received orders (capital-good sector), of the expected demand (consumption-good sector), and the current labour productivity levels, decide whether to (i) hire new workers, (ii) fire part of the existing ones, or (iii) keep the current labour force. Each hiring firm defines a unique wage offer for the best applicant workers, based on firm- and economy-wide productivities (in the case of unionized firms) and on the received applications (in non-unionized ones). Workers select the best wage offer they get from firms to which they submitted applications, if any. When already employed, depending on the institutional regime, they may quit the current job if a better offer is received. There are no further rounds of bargaining between workers and firms in the same period. Thus, firms have no guarantee of fulfilling all the open positions, workers may not find a job even when there are still unfilled positions, and no labour market clearing is ever guaranteed. Moreover, there are no firing or hiring transaction costs.
+
+Workers of firms presenting above-average profits may receive a share of the positive free cash flows as bonus, proportionally (and in addition) to their individual wages. The remaining free cash flows of firms may be paid as dividends to firm shareholders (workers). Unemployed workers may get unemployment benefits from the government. Consumer-workers (tentatively) spend part of the income on consumption goods. Unspent income is saved in interest-paying bank accounts, and may be used to smooth future consumption expenditure. If total supply of consumer goods is insufficient to satisfy the resulting demand, the excess is (force) saved. Workers cannot get credit from banks for consumption.
+
+The central bank may fix the prime interest rate using a single or dual mandate Taylor rule, depending on the policy set-up. A share of banks' deposits are held by the central bank as compulsory reserves. The interest rate structure is such that the prime rate stands between the interest rate on deposits, as the lower bound, the interest rate on bank reserves, and the rate on loans, as the upper bound. The latter are defined according to mark-down and mark-up rules on the prime, respectively. Central bank bails out the banking sector whenever the total net worth turns negative by absorbing the failed bank liabilities and injecting a fixed amount of new capital. Rescued bank remains private. When workers are also shareholders, government may be forced to bail-out them if accumulated (forced) savings get negative. As the model is stock-flow consistent: the bail-out costs correspond to an increase of government expenditure and, likely, to an increment of the public debt. As banks and workers do not repay bail-out funds, the associated expenses worsen the conditions of public finance, potentially violating the set fiscal rules, thus triggering government expenditure cuts. However, as bail-outs repeat over time, the accumulated debt must be repaid to ensure a balanced public debt growth path. Hence, the target tax rate may be adjusted accordingly.
+
+The government charges tax on profits, income, and imports, provides education, pays unemployment benefits and worker training, do procurement of goods, and may rescue/take ownership of leading bankrupt firms. Education, unemployment benefits, and training are represented as transfers to workers. Goods procurement represent demand to consumption good sector. Public consumption over GDP fluctuates counter-cyclically around a fixed value. The government still enforces a minimum wage indexed (partly or fully) to the aggregate productivity of the economy.
+
+The model is fully stock-flow consistent, at the macro (world and country), micro (sector), and individual (firm and worker) levels, at any time step. Entrant firm's capital can be derived from a mix between bank debt and (shareholder) worker-owned stock, according to the configuration.
+
+The model supports an institutional/policy change (shock) at a predefined time step. When it occurs, for a hold-on period a fraction of new firms are introduced in the market using a different configuration from the existing firms (``post-change'' vs. ``pre-change'' types). When the hold-on period is over, the probability of an entrant firm to belong to one of the two groups is given by the joint market share of that group.
+
+\bigskip
+
+Please see the next sections and the Appendix A for details, including for precise specifications of the behavioural rules presented above, and for further references detailing the K+S model modules.
+
+
+\subsection{International trade}
+
+The model can be configured with multiple countries, under the same structure but different
+parametrizations. Countries have their own currency and may trade machines and consumption goods. Machine trade follows the same organization presented in \cite{fanti2024ns}, and is summarized in Appendix A.
+
+The exchange rates $e_{y,t}$ and $e_{w,t}$, between countries $y$ and $w$, determine the domestic prices of imported goods, and conversely (see details below). So, the gross price paid by firm $j$ or consumer $\ell$ in country $y$ for buying a machine or consumption good imported from capital-good firm $i$ or consumption-good firm $j$ at country $w$, inclusive of duties and transaction costs, is:
+\begin{equation}
+	p_{j|\ell,t}^m = \dfrac{ e_{y,t} ~ p_{i|j,t} }{ e_{w,t} \left( 1 - {tr}_y^{mk|mc} \right) \left( 1 - {tr}_w^{x1|x2} \right) },
+\end{equation}
+being ${tr}_y^{mk}, {tr}_y^{mc} \in [0,1[$ country-specific parameters representing duties imposed by country $y$ on gross final prices of imported machines (superscript $mk$) or consumer products ($mc$). ${tr}_w^{x1}, {tr}_w^{x2} \in [0,1[$ are parameters modeling transaction costs and other duties on capital- ($x1$) and consumption-good ($x2$) sector exports due in country $w$. Firms get the same price $p_{i|j,t}$, in home currency, for goods sold domestically or abroad. Duties and costs are collected by the respective government of the exporting ($w$) and the importing ($y$) countries.
+
+Competition among countries for consumption-good exports takes place worldwide, and is modelled at the country level. The competitiveness $E_{y,t}^c$ of country $y$ in consumption goods is defined by a weighted combination of the standardized\footnote{Prices and qualities are standardized to the interval $[0.1, 0.9]$ using a log-linear transformation.} reference export price $p_{y,t-1}'$ and quality $q_{y,t}'$:
+\begin{equation}
+	E_{y,t}^c = \delta_1 \left( 1 - p_{y,t-1}' \right) + \delta_2 ~ q_{y,t-1}',
+\end{equation}
+where $(\delta_1, \delta_2) \in \mathbb{R}_+^2$ are parameters. Reference export price $p_{y,t} = e_{y,t} ~ \bar{p}_{y,t} ~ / \left( 1 - {tr}_y^{xc} \right)$ is computed considering the nominal exchange rate $e_{y,t}$, the weighted-average domestic price of consumption good $\bar{p}_{y,t}$, and the export barriers ${tr}_y^{xc}$. $q_{y,t}$ is the weighted-average domestic quality.
+
+Countries compete to supply the worldwide demand for consumption-good imports. The export share of country $y$ is directed by a replicator dynamics driven by the \emph{relative} competitiveness:
+\begin{equation}
+	f_{y,t}^{cx} = \max \left( f_{y,t-1}^{cx} \left[ 1 + \chi_x ~ \dfrac{ E_{y,t}^c - \bar{E}_t^c }{ \bar{E}_t^c } \right], ~ f_0 \right), \qquad \bar{E}_t^c = \sum_{ y } f_{y,t-1}^{cx} ~ E_{y,t},
+\end{equation}
+$\bar{E}_t^c$ is the worldwide weighted-average competitiveness, $\chi_x \in \mathbb{R}_+$ is the replication parameter, and $f_0 \in ~ ]0, 1[$ is a market-share fixed baseline. The corresponding desired exports value of country $y$ in domestic currency is:
+\begin{equation}
+	X_{y,t}^{c,d} = f_{y,t}^{cx} ~ \sum_{w \in \Omega} \dfrac{ e_{y,t} }{ e_{w,t} } M_{w,t}^{c,d},
+\end{equation}
+where $\Omega$ is the set of all countries in the world, and $M_{w,t}^{c,d}$ is the desired imports of each country $w$.
+
+Similarly, the share of consumption-good imports in country $y$'s domestic market is also driven by the competitiveness $E_{y,t}^c$ of its industry, modelled by a second bounded quasi-replicator equation:
+\begin{equation}
+	f_{y,t}^{cm} = \min \left( \max \left( f_{y,t-1}^{cm} \left[ 1 + \chi_m \frac{ \left( 1 - {tr}_y^{mc} \right) \bar{E}_t^c - E_{y,t}^c }{ E_{y,t}^c } \right], ~ f_0 \right), ~ f_y^{max} \right), \quad f_y^{max} > f_0,
+\end{equation}
+$\chi_m \in \mathbb{R}_+$ is the replicator parameter, and $f_y^{max} \in ~ ]0, 1[$ is a maximum import share parameter. Consequently, the desired imports value in domestic currency is:
+\begin{equation}
+	M_{y,t}^{c,d} = f_{y,t}^{cm} ~ C_{y,t}^d,
+\end{equation}
+where $C_{y,t}^d = C_{y,t}^{w,d} + G_{y,t}^{c,d}$ is the desired aggregate consumption, considering workers and government demand for consumption-goods, respectively (see Appendix A).
+
+Therefore, the effective imports $M_{y,t}^c$ and exports $X_{y,t}^c$ depend on the supply and demand conditions of countries and are obtained by allocating the entire worldwide demand or supply, iteratively, but \emph{likely} not both. The process avoids \emph{simultaneous} worldwide excess demand and supply. There is no market clearing at the international level: excess demand leads to additional (forced) savings of agents, \emph{or} oversupply becomes inventories at firms. If country $y$ desired supply of consumption-goods is insufficient to match the net desired demand $C_{y,t}^d - M_{y,t}^{c,d} + X_{y,t}^{c,d}$, domestic  market has precedence (up to $C_{y,t}^d - M_{y,t}^{c,d}$) and, potentially, $M_{y,t}^c > M_{y,t}^{c,d}$ if there is excess supply abroad, and conversely, if domestic supply is in excess of net desired demand, but there is excess demand worldwide, $X_{y,t}^c > X_{y,t}^{c,d}$. Import shortages are split proportionally among countries. Exports are allocated to consumption-good firms according to the same dynamics used in the exporter country domestic market (see Appendix A).\footnote{This arrangement is schematically equivalent to the international trade of goods being managed solely by trading companies, which procure goods in the domestic markets and resell them directly to consumers abroad.}
+
+
+\subsection{Exchange rate and trade balance}
+
+For convenience, the domestic currency exchange rate $e_{y,t}$ of each country is expressed in relation to a (notional) stable currency. Therefore, the nominal exchange rate between countries $y$ and $w$, the number of units of $y$'s currency to buy one unit of $w$'s money, is defined as $e_{y,t} / e_{w,t}$. In other words, $e_{y,t}$ is the domestic price of the notional foreign currency.
+
+The nominal exchange rate evolves according to the current account conditions:
+\begin{equation}
+	e_{y,t} = e_{y,t-1} \left( 1 - \gamma_y^e ~ \dfrac{ {TB}_{y,t-1} }{ e_{y,t-1} ~ Y_{t-1} } \right), \qquad Y_t = \sum_w \dfrac{ Y_{w,t} }{ e_{w,t} }
+\end{equation}
+being $\gamma_e \in \mathbb{R}$ a parameter, and $Y_t$, the world product in international monetary-standard terms, $Y_{y,t}$ is the GDP in domestic currency. ${TB}_{y,t}$ is the balance of trade or net exports of country $y$ in domestic currency:
+\begin{equation}
+	{TB}_{y,t} = X_{y,t} - M_{y,t},
+\end{equation}
+where $X_{y,t} = X_{y,t}^k + X_{y,t}^c$ are the effective exports of capital and consumption goods of country $y$, respectively, and $M_{y,t} = M_{y,t}^k + M_{y,t}^c$, the effective imports of such goods. Intuitively, if country $y$ has ${TB}_{y,t} > 0$, $e_{y,t}$ decreases, and a smaller amount of domestic currency is required to buy one unit of a country $w$ with stable exchange rate (${TB}_{w,t} = 0$). That is, the currency of country $y$ \emph{appreciates} when ${TB}_{y,t} > 0$, and conversely.
+
+Countries' currencies are assumed to be fully convertible. Domestic agents only keep reserves in the national currency. Central banks offer unlimited supply of domestic and foreign money for the required exchange transactions. Consequently, the central bank must be able can carry foreign currency reserves indefinitely, and have access to other central banks to convert its own currency as needed.\footnote{Alternatively, one may assume the central banks regularly clear the excess reserves, despite not explicitly modelled.} In summary, there is no foreign currency constraint for countries with a (even permanent) deficit on the balance of trade (${TB}_{y,t} < 0$).
+
+
+\subsection{State-owned firms}
+
+Under usual conditions, firms in both capital- and consumption-good sectors are private, as detailed in Appendix A. However, under specific policy settings, the government may intervene when capital firms producing advanced machinery, or large consumption ones, are exiting the market because of financial trouble (bankruptcy). The intervention may be applied only to firms that satisfy, respectively for capital- and consumption-good firms:
+\begin{equation}
+	A_{i,t}^\tau > \gamma^1_g \bar{A}_t^\tau,
+\end{equation}
+\begin{equation}
+	L_{j,t} > \gamma^2_g \bar{L}_t^2,
+\end{equation}
+being $(\gamma^1_g, \gamma^2_g) \in \mathbb{R}^2_+$ two threshold parameters, $\bar{A}_t^\tau$, the average productivity of machines currently offered by the capital-good sector\footnote{The labour productivity of the machine when producing consumption goods, see Appendix A.}, and $\bar{L}_t^2$, the average number of workers employed by firms in the consumption-good sector. In this case, the government rescues only the best eligible firm in sector (larger $A_{i,t}^\tau$ or $L_{j,t}$), each period the policy is applied.
+
+When a firm is rescued, all private equity is transferred to the state (full statization), without any compensation to private shareholders. Additionally, all outstanding firm debt $Deb_{i|j,t}$ is repaid by the government, and new money is also provided:
+\begin{equation}
+	NW_{i|j,t} = NW^z_0 \ \dfrac{ PPI_t }{ p^k_0 }, \quad z = 1, 2,
+\end{equation}
+where $(NW^1_0, NW^2_0) \in \mathbb{R}^2_+$ are parameters defining initial firm cash at $t = 1$ for capital- and consumption-good firms, respectively, $PPI_t$ is the producer price index at time $t$, and $p^k_0$ is the initial price of machines, a parameter (equivalent to $PPI_0$).\footnote{This equation simply adjusts the initial values to the producer inflation.} So, the total new equity injected by the government in rescued firms is equal to $Deb_{i|j,t} + NW_{i|j,t}$.
+
+Immediately after statization, government-owned capital-good firms are endowed with a new technological set $(A_i^\tau, B_i^\tau)$ for the production of machines, defined by:
+\begin{equation}
+	A_i^\tau = \left( 1 - x_6 \right) \ \max_z { A_z^\tau },
+\end{equation}
+\begin{equation}
+	B_i^\tau = \left( 1 - x_6 \right) \ \max_z { B_z^\tau }.
+\end{equation}
+$x_6 \in [0, 1]$ is a parameter defining the firm initial distance from the technological frontier represented by the maximum productivities $A_z^\tau$ and $B_z^\tau$ of any existing firms $z$.
+
+Public firms have bank loans guaranteed by the government, which allows for larger leverage on debt. This is implemented by a differentiated value to the parameter $\Lambda$ which defines the prudential limit banks impose on loans over the ratio $Deb_{i|j,t} / \max{ \left( NW_{i|j,t}, OM_{i|j,t} \right) }$. The operating margin $OM_{i|j,t}$ is defined as the difference between sales $S_{i|j,t}$ and wage costs $W_{i|j,t}$. See Appendix A for details.
+
+In addition to improved initial technology and loan guarantee, government-owned firms may behave differently from private firms with regards to (i) increased propensity to R\&D (as defined by parameter $\nu$), (ii) more ``patience'' to recover investment, allowing for accelerated replacement of capital (parameter $b$), (iii) additional slack when investing in new capital (parameter $\iota$), (iv) differentiated demand of labour education (parameters $theta_2$ and $theta_3$), (v) higher education-wage premiums (parameters $phi_2$ and $phi_3$), and (vi) alternative hiring/firing strategies (priority to worker skills vs. wage levels). The behavioural rules applicable to government-owned firms are the same presented in Appendix A for private ones, being the cited parameter values the only (potential) difference.
+
+Public firms leave the market similarly to private ones, because of bankruptcy ($NW_{i|j,t} < 0$) or irrelevant market share $f_{i|j,t}$ (see Appendix A for details). The sole difference is the government loan guarantee, which ensure banks recover any outstanding debt on the exit of such firms.
+
+
+\bigskip
+
+In Appendix A, we briefly present the remaining behavioural rules characterizing agents. For in-depth presentations, see \citealp{dosi2010schumpeter, dosi2015fiscal, dosi2017flexibility, fanti2022education, fanti2024ns}. The model's baseline parameters, initial conditions and stock-flow matrices are presented in Appendix B.
+
+
+\subsection{Timeline of events}
+
+In each simulation period the following events take place:
+
+\begin{enumerate}
+	\item Educated workers enter the market, retire, and update their skills;
+	\item Machines ordered in the previous period (if any) are delivered;
+	\item Central and commercial banks set interest rate structure and credit supply;
+	\item Government decides about expenditure on consumption;
+	\item Capital-good firms perform R\&D and signal machines to consumption-good firms;
+	\item Consumption-good firms determine desired production, investment and workforce;
+	\item Firms allocate cash-flows and (if needed) borrow from banks to operate and invest;
+	\item Firms send/receive machine-tool orders for the next period (if applicable);
+	\item Job-seeking workers send job applications to firms;
+	\item Wages are set (indexation or bargaining) and job vacancies are partly or totally filled;
+	\item Firms pay wages/bonuses and government pays unemployment benefits;
+	\item Workers decide about desired consumption and savings;
+	\item Market shares are allocated according to relative competitiveness;
+	\item Firms and banks compute their profits, pay taxes and repay (part of) their debt;
+	\item Exit takes place, near-zero share and bankrupt firms leave the market;
+	\item Prospective entrant firms decide to enter according to market conditions;
+	\item Aggregate variables are computed.
+\end{enumerate}
+
+
+
+\begin{appendices}
+
+\section*{Appendix A}
+\label{appendixA}
+
+
+\subsection*{Education}
+
+Workers may receive heterogeneous (free) education before entering the labour market, and have a fixed working lifetime $T_r \in \mathbb{N}$ before retiring (retired workers are replaced by new ones). Individual years of schooling ${ed}_\ell \in [0, 16]$ is attributed to each worker $\ell$, producing three general levels of education: (1) primary (${ed}_\ell \le 8$), (2) secondary ($8 < {ed}_\ell \le 12$), and (3) tertiary (${ed}_\ell > 12$). The government expends $G_t^{ed}$ to provide education:
+\begin{equation}
+	G_t^{ed} = \epsilon_{ed} Y_{t-1},
+\end{equation}
+$\epsilon_{ed} \in [0, 1]$ is a parameter, and $Y_t$, the nominal GDP. To obtain an advanced-country educational profile, the expenditure must be $\epsilon_{ed} = \epsilon_{ad}$, $\epsilon_{ad} \in [0, 1]$ is a parameter. The education level is draw from a beta distribution with the support adjusted to the expenditure:
+\begin{equation}
+	{ed}_\ell \sim 16 \thickspace \mathrm{beta} \left( g \, \alpha_{ed}, \beta_{ed} / g \right), \qquad
+	g = \left( \frac{ \epsilon_{ed} }{ \epsilon_{ad} } \right)^{\vartheta_{ed}},
+	\label{educDist}
+\end{equation}
+where $(\alpha_{ed}, \beta_{ed}) \in \mathbb{R}_+^2$ are parameters defining the beta PDF that proxy the educational attainment distribution of an advanced country ($g = 1$), mapped to the $[0, 16]$ support. $\vartheta_{ed} \in \mathbb{R}_+$, a parameter, is the sensitivity of the distribution shape when $\epsilon_{ed} \ne \epsilon_{ad}$.
+
+
+\subsection*{Technical change}
+
+The technology of capital-good firm $i$ is defined by $(A_i^{\tau},B_i^{\tau})$. $A_i^{\tau}$ is the notional labour productivity of the machine-tool manufactured by firm $i$ for the consumption-good sector, while $B_i^{\tau}$ is the labour productivity to produce the machine. Superscript $\tau$ denotes the technology vintage being produced/used. Given the monetary average wage $w_{i,t}$ paid by firm $i$, its unit cost of production is:
+\begin{equation}
+	c_{i,t}  =\frac{ w_{i,t} }{ m_1 B_i^{\tau} },
+\end{equation}
+$m_1 \in \mathbb{R}_+$ is the fixed capital productivity.
+
+Under a fixed mark-up $\mu_1 \in \mathbb{R}_+$ pricing rule, price $p_{i,t}$ of firm $i$ is defined as:
+\begin{equation}
+	p_{i,t} = ( 1 + \mu_1 ) c_{i,t}.
+\end{equation}
+
+Firms in the capital-good industry adaptively strive to increase market shares and profits by improving technology via innovation and imitation. Firms invest in R\&D a fraction $\nu \in [0,1]$ of their past sales $S_{i,t-1}$:
+\begin{equation}
+	RD_{i,t} = \nu S_{i,t-1}.
+\end{equation}
+R\&D activity is performed by workers devoted to this activity, whose demand is:
+\begin{equation}
+	L_{i,t}^{R \& D} = \frac{ RD_{i,t} }{ w_{i,t} }
+\end{equation}
+Firms split their R\&D workers $L_{i,t}^{RD}$ between innovation (${IN}_{i,t}$) and imitation (${IM}_{i,t}$) activities according to the parameter $\xi \in [0,1]$:
+\begin{equation}
+	IN_{i,t} = \xi L_{i,t}^{RD},
+	\label{innoL}
+\end{equation}
+\begin{equation}
+	IM_{i,t} = ( 1 - \xi ) L_{i,t}^{RD}.
+	\label{imiL}
+\end{equation}
+
+In-firm, incremental innovation and imitation are two-step processes. The first step determines whether a firm obtains or not access to an innovation or imitation — irrespectively of whether it will ultimately be a success or a failure — through a draw from a Bernoulli distribution with mean $\theta_{i,t}^{in}$ or $\theta_{i,t}^{im}$. R\&D allocation $IN_{i,t}$/$IM_{i,t}$ and education distribution $g$ affect the probability of obtaining access to innovation and imitation respectively:
+\begin{equation}
+	\theta_{i,t}^{in} = 1 - e^{ -\zeta_1 \, g \, IN_{i,t}' },
+	\label{innoProb}
+\end{equation}
+\begin{equation}
+	\theta_{i,t}^{im} = 1 - e^{ -\zeta_2 \, g \, IM_{i,t}' }.
+	\label{imiProb}
+\end{equation}
+$(\zeta_1, \zeta_2) \in \mathbb{R}_+^2$ are parameters, and $(IN_{i,t}', IM_{i,t}')$ are the standardized share of workers allocated to innovative and imitative R\&D activities, respectively.
+
+If a firm innovates, it may draw a new machine-embodying technology $(A_{i,t}^{in}, B_{i,t}^{in})$ according to:
+\begin{equation}
+	A_{i,t}^{in} = A_{i,t} \left( 1 + x_{i,t}^A \right),
+\end{equation}
+\begin{equation}
+	B_{i,t}^{in} = B_{i,t} \left(  1 + x_{i,t}^B \right),
+\end{equation}
+where $x_{i,t}^A$ and $x_{i,t}^B$ are two independent draws from a $\mathrm{beta}{(\alpha_1,\beta_1)}$ distribution, $(\alpha_1,\beta_1) \in \mathbb{R}^2_+$ over the fixed support $[\munderbar{x}_1,\bar{x}_1] \subset \mathbb{R}$.
+
+Imitation also follows a two-step procedure. As before, the access to imitation come from sampling a Bernoulli with mean $\theta_{i,t}^{im}$. If successful, firms try to imitate machines developed by other worldwide firms, domestically or (potentially) abroad. The imitation success probability is inversely proportional to the technological gap $\mathcal{D}_t^{m,n}$ between imitating and imitated firms. The gap depends on the technological coordinates $(A_i^\tau, B_i^\tau)$ defining the operating unit cost $c_{i,t}^2$ and price $p_{i,t}^1$ to machine buyers. The gap is measured as the Euclidean distance -- in the $(c^2, p^1)$ normalized space -- of the imitator's $m$ current machines and the imitated firm $n$:
+\begin{equation}
+	\mathcal{D}_t^{m,n} = \sqrt{ \left( \dfrac{ c_{n,t}^2 - c_{m,t}^2 }{ \bar{c}_t^{2w} } \right)^2 + \left( \dfrac{ p_{n,t}^1 - p_{m,t}^1 }{ \bar{p}_t^{1w} } \right)^2 },
+\end{equation}
+where $c_{i,t}^2$ is the unit cost of a client firm when using the machine, and $p_{i,t}^1$ is its price. $\bar{c}_t^{2w}$ and $\bar{p}_t^{1w}$ are the respective (world) average values. They are calculated as:
+\begin{equation}
+	c_{i,t}^2 = \dfrac{ e_{y,t} ~ \bar{w}_t^{2w} }{ A_i^\tau },
+\end{equation}
+\begin{equation}
+	p_{i,t}^1 = \dfrac{ \left( 1 + \mu_1 \right) \bar{w}_{i,t}^1 }{ m_1 B_i^\tau }.
+\end{equation}
+$A_i^\tau$ is the machine labour productivity when producing consumption-goods, and $B_i^\tau$ is the labour productivity of firm $i$ when building the machine. $\tau$ represents the best technology known by firm $i$. $\bar{w}_t^{2w}$ is the (world) average wage at the consumption sector, and $\bar{w}_{i,t}^1$ is the average wage at firm $i$. $\mu_1 \in \mathbb{R}_+$ is the mark-up, and $m_1 \in \mathbb{R}_+$, the capital productivity, both parameters. When imitating a foreign firm, all monetary values are converted to the domestic currency of the imitator firm using the exchange rate $e_{m,t} / e_{n,t}$ between countries, $e_{y,t}$ being country $y$ exchange rate to the international reference currency (see below).
+
+Once firm $i$ succeeds on imitating firm $v$, the different education expenditures between the host countries, if any, imply in distinct absorptive capacities:
+\begin{equation}
+	A_{i,t}^{im} = \frac{ g_i }{ g_h } A_{v,t-1},
+	\label{imiProdA}
+\end{equation}
+\begin{equation}
+	B_{i,t}^{im} = \frac{ g_i }{ g_h } B_{v,t-1}.
+	\label{imiProdB}
+\end{equation}
+$(A_{i,t}^{im}, B_{i,t}^{im})$ are the productivities achieved by firm $i$ when imitating firm $v$  machines defined by $(A_{v,t-1}, B_{v,t-1})$. $( g_i, g_h )$ are the adjusted relative government expenditures $g$ of the countries where firms $i$ and $v$ are established.
+
+Firms accessing the second stage of the innovation or imitation process select the machine to produce using the rule:
+\begin{equation}
+	\min \left( p_{i,t}^m + bc_{A_{i,t}^m}^m \right), \quad m = \tau, in, im,
+\end{equation}
+where $b \in \mathbb{R}_+$ is a payback parameter used by firms' clients (see below).
+
+
+\subsection*{Labour productivity}
+
+Worker education level drives individual labour productivity at consumption-good firms:
+\begin{equation}
+	A_{\ell,t} = \frac{s_{\ell,t}}{\bar{s}_t} A_i^\tau \left( \frac{ {ed}_\ell }{ {\overline{ed}_{ad}} } \right)^{\tau_{ed}},
+	\label{prod2}
+\end{equation}
+being $\bar{s}_t$ is the average overall skill level (see below), and $A_i^\tau$, the standard notional productivity of the specific machinery vintage in whose operation the worker is involved. $\tau_{ed} \in \mathbb{R}_+$ a scaling parameter defining the effect intensity of a deviation from the expected education level of an advanced country $\overline{ed}_{ad} = 16 \, \alpha_{ed} / \left( \alpha_{ed} + \beta_{ed} \right)$. Capital-good sector productivity is affected by education as well:
+\begin{equation}
+	B_{i,t} = B_i^\tau \left( \frac{ {ed}_{t-1}^1 }{ {\overline{ed}_{ad}} } \right)^{\tau_{ed}},
+	\label{prod1}
+\end{equation}
+where $B_{i,t}$ is the effective labour productivity of firm $i$ to produce machines at time $t$, $B_i^\tau$ is the notional labour productivity to produce the current machine vintage, and ${ed}_t^1$, the average education level of workers in capital-good sector.
+
+The skill level $s_{\ell,t} \in \mathbb{R}_+$ of worker $\ell$ evolves in time $t$ as a multiplicative process:
+\begin{equation}
+	s_{\ell,t} =
+	\begin{cases}
+		( 1 + \tau_T ) s_{\ell,t-1} & \mbox{ if employed in } t-1 \\
+		\dfrac{1}{ 1 + \tau_U } s_{\ell,t-1} & \mbox{ if unemployed in } t-1,
+	\end{cases}
+	\label{eq:skills}
+\end{equation}
+where $(\tau_T, \tau_U) \in \mathbb{R}^2_+$ are parameters governing the learning rate while the worker is employed or unemployed, respectively. When hired, worker acquires the minimum skill level present in the firm, if above her present level. Worker has a fixed working life, retires after a number of periods $T_r$, and is replaced by a new one with skills equal to the minimum among employed workers.
+
+Firms in consumption-good sector do not conduct R\&D. Instead, they access new technologies incorporating machines to their existing capital stock $\Xi_{j,t}$. The firm effective, machine-level labour productivity $A_{j,t}$ results from both machine (single-stage) notional productivity $A_i^\tau$, and worker skills $s_{\ell,t}$ and education $ed_\ell$, as described previously, and is computed as:
+\begin{equation}
+	A_{j,t} = \frac{1}{L_{j,t}} \sum_{\ell \in \{L_{j,t}\}} A_{\ell,t},
+\end{equation}
+where, $L_{j,t}$ is the number of workers at firm $j$, and $\{L_{j,t}\}$ is the set of these workers. $A_{\ell,t}$ is worker $\ell$ productivity (Eq. \ref{prod2}). $A_{j,t}$ and $A_{\ell,t}$ are machine-level labour productivities. So, if the mean wage paid by $j$ is $w_{j,t}$, the average unit cost is given by:
+\begin{equation}
+	c_{j,t} = \frac{ w_{j,t} }{ m_2 A_{j,t} }.
+\end{equation}
+$m_2 \in \mathbb{R}_+$ is the fixed notional capital productivity, measured as the potential output per period for a single machine.
+
+
+\subsection*{Investment}
+
+Consumption-good firm $j$ invests according to expected demand $D^e_{j,t}$ (monetary terms), computed by an adaptive rule:
+\begin{equation}
+	D^e_{j,t} = \operatorname{g}\left( D_{j,t-1}, D_{j,t-2}, D_{j,t-n} \right), \quad 0 < n < t,
+\end{equation}
+where $D_{j,t-n}$ is the actual demand faced by firm at time $t-n$. $n \in \mathbb{N}$ is a parameter and $\operatorname{g}:\mathbb{R}^n \to \mathbb{R}_+$ is the expectation function, usually an unweighed moving average over a fixed number of periods. The corresponding desired level of production $Q^d_{j,t}$, considering the actual inventories $N_{j,t}$ from previous period, is:
+\begin{equation}
+	Q^d_{j,t} = ( 1 + \iota ) \frac{ D^e_{j,t} }{ p_{j,t-1} } - N_{j,t-1},
+\end{equation}
+being $\iota \in \mathbb{R}_+$ a parameter, $p_{j,t}$ the price of firm $j$ in $t$ (see below), and $N^d_{j,t}=\iota D^e_{j,t}$ the desired inventories.
+
+If the desired capital stock $K^d_j$, computed as the number of machines required for the desired level of production $Q_{j,t}^d$, is higher than the current $K_{j,t}$, firm invests in ${EI}^d_{j,t}$ new machines to expand capacity:
+\begin{equation}
+	{EI}^d_{j,t} = K^d_{j,t} - K_{j,t-1}.
+	\label{exp}
+\end{equation}
+As each machine has $m_2 \in \mathbb{R}_+$ fixed capital productivity:
+\begin{equation}
+	K^d_{j,t} = \frac{ Q^d_{j,t} }{ m_2 },
+\end{equation}
+
+Replacement investment ${SI}^d_{j,t}$, to substitute a set $RS_{j,t}$ of existing machines by more productive ones, is decided according to a fixed payback period $b \in \mathbb{R}_+$. Machines $A_i^\tau \in \Xi_{j,t}$ are evaluated by the ratio between the price of new machines and the corresponding (labour) cost savings:
+\begin{equation}
+	\begin{gathered}
+		SI^d_{j,t} = \# RS_{j,t},\\
+		RS_{j,t} = \left\{ A_i^\tau \in \Xi_{j,t}: \frac{ p^*_{i,t} }{ w_{j,t-1} \left( \frac{ 1 }{ A_i^\tau } - \frac{ 1 }{ A^*_{i,t} } \right) } \leq b \quad \lor \quad t - \tau > \eta \right\},
+	\end{gathered}
+	\label{scrap}
+\end{equation}
+where $p^*_{i,t}$ and $A^*_{i,t}$ are the price and the notional labour productivity upon the selected new machine from supplier $i$, among the ones known to firm $j$. $w_{j,t}$ is the average wage paid by this firm. Supplier $i$ is selected by comparing the received brochures from competing capital-good firms using the same total cost of ownership criterion. For a foreign supplier in country $w$ sending machines to country $y$, price $p^*_{i,t} = p_{i,t} ~ e_{y,t}/e_{w,t} \left( 1 + {tr}_w^{xk} \right) \left( 1 + {tr}_y^{mk} \right)$ considers price at origin country $p_{i,t}$, the exchange rate between countries $e_{y,t}/e_{w,t}$, and countries' respective export and import costs $({tr}_w^{xk}, {tr}_y^{mk}) \in \mathbb{R}_+^2$ , two parameters. Machines over expected technical life $\eta \in \mathbb{N}$, a parameter, are also included for scrapping.
+
+
+\subsection*{Labour demand, wages, and search-and-match process}
+
+Labour demand of firm $j$ in the consumption-good sector $L_{j,t}^d$ is determined by the desired output $Q^d_{j,t}$, the capital productivity $m_2$ and the expected average labour productivity $A_{j,t}$:
+\begin{equation}
+	L_{j,t}^d = \frac{ Q^d_{j,t} }{ m_2 A_{j,t} }.
+\end{equation}
+Capital-good firms, instead, compute $L_{i,t}^d$ considering orders $Q_{i,t}$ and final labour productivity $m_1 B_{i,t}$, being $B_{i,t}$ the notional productivity of labour when building the current machine generation produced by firm $i$, and $m_1$, a scale parameter (see above). Labour demand is segmented in three education categories $c = 1, 2, 3$:
+\begin{equation}
+	L_{i|j,t}^{d,1} = \left( 1 - \theta_2 - \theta_3 \right) L_{i|j,t}^d, \qquad L_{i|j,t}^{d,2} = \theta_2 L_{i|j,t}^d, \qquad L_{i|j,t}^{d,3} = \theta_3 L_{i|j,t}^d,
+\end{equation}
+being $\theta_2, \theta_3 \in [0, 1]$, $\theta_2 + \theta_3 \le 1$, parameters, $L_{i|j,t}^{d,c}$, $c = 1, 2, 3$, the labour demand of firm $i$ or $j$ for the respective level workers. R\&D labour demand consists of tertiary-level ($c=3$) workers only.
+
+Firms decide to hire or fire workers according to expected production $Q_{i,t}$/$Q^d_{j,t}$: if increasing, $\Delta L_{i|j,t}^{d,c} > 0$, $c = 1, 2, 3$, new workers on each category are (tentatively) hired in addition to the existing number $L_{i|j,t-1}^c$ in each category. Firm $j$ (expectedly) gets in the candidates queue $\{\ell^s_{j,t} \}$ a fraction of the total applicant workers, proportional to firm market share $f_{j,t-1}$:
+\begin{equation}
+	\mathrm{E}(L^s_{j,t}) = \left[ \omega \left( 1 - U_{t-1} \right) + \omega_u U_{t-1} \right] L^S f_{j,t-1},
+\end{equation}
+where $L^S \in \mathbb{N}$ is the total labour supply, $U_t$, the unemployment rate, and $(\omega, \omega_u) \in \mathbb{R}^2_+$ are parameters defining the number of applications each job seeker sends if employed or unemployed, respectively. Firms organize the candidate queue into three sub-queues, according to the worker category $c$. Considering the set of workers in the sub-queues $\{\ell_{i|j,t}^{s,c}\}$, each firm select the subsets of desired workers $\{ \ell_{i|j,t}^{d,c} \}$ to make a job (wage) offer:
+\begin{equation}
+	\{ \ell_{i|j,t}^{d,c} \} = \{\ell_{i|j,t} \in \{\ell_{i|j,t}^{s,c} \}: w^r_{\ell,t} \le w_{i|j,t}^{o,c}\}, \quad c = 1,2,3.
+\end{equation}
+Firms in consumption-good sector target workers that would accept the wage offer $w_{j,t}^{o,c}$ (see below), considering the wage $w^r_{\ell,t}$ requested by workers, if any. In the capital-good sector, firms top the wages offered by the consumer-good sector ($w_{i,t}^{o,c} = \max_j w_{j,t}^{o,c}$).
+
+The process for hiring goes from higher to lower education levels. Remaining open positions in level $c+1$ are transferred to the labour demand $L_{i|j,t}^{d,c}$ of the level $c$ immediately below, if any. Firm $i$ or $j$ hires up to the total demand $L_{i|j,t}^{d,c}$ for each category or up to all workers in each sub-queue, whichever is lower. The total number of workers $L_{i|j,t} = \sum_{c=1}^{3} L_{i|j,t}^c$, given the current workforce $L_{i|j,t-1}$, is bound by:
+\begin{equation}
+	0 \leq L_{i|j,t}^c \leq L_{i|j,t}^{d,c} \leq L_{i|j,t}^{s,c}, \qquad L_{i|j,t}^{z,c} = L_{i|j,t-1}^c + \#\{\ell_{i|j,t}^{z,c}\}, \qquad z = d,s, \quad c = 1,2,3.
+\end{equation}
+
+The search, wage determination and firing processes differ according to the configuration. When there is no bargaining, firm $j$ offers the wages:
+\begin{equation}
+	w_{j,t}^{o,1} = \min \left( \left[ 1 + {WP}_{j,t} \right] w_{j,t-1}^{o,1}, \quad p_{j,t-1} A_{j,t-1} \right),
+\end{equation}
+\begin{equation}
+	w_{j,t}^{o,c} = \max \left( \left[ 1 + {WP}_{j,t} \right] w_{j,t-1}^{o,c}, \quad \left[ 1 + \phi_c \right] w_{j,t}^{o,c-1} \right), \qquad c = 2, 3,
+\end{equation}
+that are accepted by the worker if she has no better offer. The upper bound for category 1 wages is the break-even wage defined by firm price $p_{j,l}$, and the labour notional (single-stage) average productivity $A_{j,t}$. $(\phi_2, \phi_3) \in \mathbb{R}_+^2$ are parameters defining a lower bound to the wage-category structure. The wage premium is defined as:
+\begin{equation}
+	{WP}_{j,t} = \psi_2 \frac{ \Delta A_{t} }{ A_{t-1} } + \psi_4 \frac{ \Delta A_{j,t} }{ A_{j,t-1} }, \qquad \psi_2 + \psi_4 \leq 1,
+\end{equation}
+being $A_{t}$ the aggregate labour notional productivity, $\Delta$ the time difference operator, and $(\psi_2, \psi_4) \in \mathbb{R}^2_+$ parameters. $w_{j,t}^{o,c}$ may be also applied to existing workers of category $c$, according to the institutional set-up.
+
+When one-round bargaining exists, workers have reservation wages equal to the unemployment benefit, if any, and request a wage $w_{\ell,t}^r$ in the job application:
+\begin{equation}
+	\label{worker}
+	w_{\ell,t}^r =
+	\begin{cases}
+		w_{\ell,t-1} ( 1 + \epsilon ) & \mbox{ if employed in } t - 1 \\
+		w_{\ell,{t}}^s & \mbox{ if unemployed in } t - 1,
+	\end{cases}.
+\end{equation}
+$w_{\ell,t}$ is the current wage for the employed workers and $\epsilon \in \mathbb{R}_+$, a parameter. Unemployed workers have a shrinking satisfying wage $w_{\ell,{t}}^s$, accounting for the wage history:
+\begin{equation}
+	w_{\ell,t}^s = \max \left( w_{t}^u, \frac{ 1 }{ T_s } {\sum_{n=1}^{T_s}} w_{\ell,t-n} \right),
+\end{equation}
+being $T_s \in \mathbb{N}$, the moving average time-span parameter.
+
+An employed worker of category $c$ accepts the best offer $w_{i|j,t}^{o,c}$, if any, she receives for this category, if higher than current wage $w_{\ell,{t}}$. An unemployed worker always accepts the best offer if at least equal to the unemployment benefit $w_{t}^u$ and for a category $c$ compatible with her education $ed_{\ell}$. She may also consider offers for categories below her education with probability $1 - \Delta c / 2 T_{\ell,t}^u$, where $\Delta c = 0, 1, 2$ is the category difference (actual vs. offered position), and $T_{\ell,t}^u$ is the number of periods the worker has been unemployed.
+
+Government may impose a minimum wage $w_{t}^{min}$ on firms, indexed on aggregate productivity $A_t$:
+\begin{equation}
+	w_{t}^{min} = w_{t-1}^{min} \biggl( 1 + \psi_2 \frac{ \Delta A_t }{ A_{t-1} }\biggl).
+	\label{minimum}
+\end{equation}
+
+On top of the wage $w_{\ell,t}$ paid to worker $\ell$, a firm with above-average profit may distribute bonus $Bon_{j,t}$, equally-divided among workers:
+\begin{equation}
+	Bon_{j,t} = \psi_6 ( 1 - tr ) \Pi_{j,t-1},
+\end{equation}
+being $\psi_6 \in [0,1]$ a sharing parameter, $tr \in [0,1]$ the tax rate parameter, and $\Pi_{j,t}$ the firm gross profit. Total income of worker $\ell$ working for firm $j$ in period $t$ is $w_{\ell,t} + Bon_{j,t} / L_{j,t}$.
+
+
+\subsection*{Worker consumption and savings}
+
+Workers consume part of their income and do not take credit. Worker $\ell$ (gross) income in any period $t$ is originated by monetary transfers from firms, banks, or the government:
+\begin{equation}
+	In_{\ell,t} = w_{\ell,t} + Bon_{\ell,t-1} + Div_{\ell,t-1} + NW_{\ell,t-1}^{exit} + G_{\ell,t}^{trf} + emig_{\ell,t}^{trf} + r_{t-1}^D ~ Sav_{\ell,t-1}^{acc}, \\
+\end{equation}
+where $w_{\ell,t}$ is the wage paid by the employer firm, if employed, $Bon_{\ell,t}$ is worker $\ell$ bonus, if any, $Div_{\ell,t}$, the dividend accrued due to any firm ownership, $NW_{\ell,t}^{exit}$, liquidation net worth from private firms exiting market, $G_{\ell,t}^{trf}$ are the unemployment subsidy and other transfers from the government, if applicable, $emig_{\ell,t}^{trf}$ are transfers from other workers emigrating out of the country, if any, $r_t^D$ is the interest rate on deposits, and $Sav_{\ell,t}^{acc}$, the worker accumulated savings.
+
+Income tax is charged based on a flat rate ${tr}_{in} \in \mathbb{R}_+$, a parameter, over positive income:
+\begin{equation}
+	Tax_{\ell,t} = \max{ \left( \left[ 1 - {tr}_{in} + s_t^{in} \right] In_{\ell,t}, \quad 0 \right) }
+\end{equation}
+$s_t^{in} \ge 0$ is a possible policy shock temporarily reducing the tax. The disposable (net nominal) income is $In_{\ell,t} - Tax_{\ell,t}$.
+
+Consumer-workers real desired consumption $\hat{C}_{\ell,t}^d$ depends on the expected \emph{real} disposable income $\hat{I}n_{\ell,t}^{exp}$, and the recent-past real consumption reference $\hat{C}_{\ell,t}^{ref}$:
+\begin{equation}
+	\hat{C}_{\ell,t}^d = \max{ \left( \alpha_c ~ \hat{I}n_{\ell,t}^{exp} + \beta_c ~ \hat{C}_{\ell,t}^{ref}, \quad \gamma_c ~ \hat{C}_{\ell,t}^{ref} \right) },
+	\qquad \alpha_c + \beta_c \le 1,
+	\qquad \beta_c < \gamma_c < 1,
+\end{equation}
+$\alpha_c, \beta_c \in [0, 1]$ are parameters, as well as $\gamma_c \in [0, 1]$, defining the stickiness of consumers to reduce consumption. The expected real disposable income is:
+\begin{equation}
+	\hat{I}n_{\ell,t}^{exp} = \dfrac{ In_{\ell,t} - Tax_{\ell,t} }{ CPI_t^{exp} },
+	\qquad CPI_t^{exp} = \frac{ 1 }{ T_{exp} } \sum_{ v = 1 }^{ T_{exp} } CPI_{t-v},
+\end{equation}
+where $T_{exp} \in \mathbb{N}$ is the expectation time horizon parameter, and $CPI_t^{exp}$ is the consumer price index expectation moving average. The real consumption (habit) reference is computed as a power-weighted mean over the same horizon:
+\begin{equation}
+	\hat{C}_{\ell,t}^{ref} = \frac{ \sum_{ v = 1 }^{ T_{exp} } \left( \omega_c \right)^{ v - 1 } \hat{C}_{\ell,t-v}^d }{ \sum_{ v = 1 }^{ T_{exp} } \left( \omega_c \right)^{ v - 1 } },
+\end{equation}
+$\omega_c \in [0, 1]$ is a parameter.
+The nominal desired consumption is bounded by the available liquidity:
+\begin{equation}
+	C_{\ell,t}^d = \min{ \left( \dfrac{ \hat{C}_{\ell,t}^d }{ CPI_t^{exp} }, \quad In_{\ell,t} - Tax_{\ell,t} + Sav_{\ell,t-1}^{acc} \right) }.
+\end{equation}
+
+Worker $\ell$ expects to save $In_{\ell,t} - C_{\ell,t}^d$ in period $t$, but effective current savings $Sav_{\ell,t}$ may be higher than expected, due to unfilled demand, or negative, if desired consumption $C_{\ell,t}^d$ is above disposable income $In_{\ell,t} - Tax_{\ell,t}$:
+\begin{equation}
+	Sav_{\ell,t} = In_{\ell,t} - Tax_{\ell,t} - C_{\ell,t},
+\end{equation}
+and accumulated savings is updated as:
+\begin{equation}
+	Sav_{\ell,t}^{acc} = Sav_{\ell,t-1}^{acc} - Eq_{\ell,t-1}^{entry} + Sav_{\ell,t},
+\end{equation}
+where $Eq_{\ell,t}^{entry}$ is the investment in new equity (entrant firms), if applicable.
+
+
+\subsection*{Competition, prices, and quality}
+
+Capital-good suppliers send brochures to clients (potentially) in all countries to advertise machines. Every period, they contact existing ${HC}_{i,t}$ (historical) clients, and a number $\gamma {HC}_{i,t}$ of new prospects. $\gamma \in \mathbb{R}_+^*$ is a fixed parameter. Consumption-good firms can choose machines only from the suppliers they know, that is, the ones from which they had previously received brochures, domestic or foreign. There are no duties, additional costs or delays for imported machines.
+
+In the consumer-good sector, firm $j$ compete according to their relative competitiveness. Market share evolves following a replicator dynamics:
+\begin{equation}
+	f_{j,t} = f_{j,t-1} \left( 1 + \chi \frac{ E_{j,t} - \bar{E}_t }{ \bar{E}_t } \right), \qquad \bar{E}_t = \sum_{j} E_{j,t} f_{j,t-1},
+\end{equation}
+where $\chi \in \mathbb{R}_+$ is a parameter. Firm relative competitiveness $E_{j,t}$ is defined by the individual price $p_{j,t}'$, unfilled demand $l_{j,t}'$ and product quality $q_{j,t}'$:
+\begin{equation}
+	E_{j,t} = \omega_1 \left( 1 - p_{j,t-1}' \right) + \omega_2 \left( 1 - l_{j,t-1}' \right) + \omega_3 q_{j,t-1}',
+	\label{competitiveness}
+\end{equation}
+being $(\omega_1, \omega_2, \omega_3) \in \mathbb{R}^3_+$ parameters. All competitiveness components are log-normalized at the industry level to the interval $[0.1,0.9]$.
+
+Consumption-good prices are set by firm $j$ applying a variable mark-up $\mu_{j,t}$ on average unit cost $c_{j,t}$:
+\begin{equation}
+	p_{j,t} = \left( 1 + \mu_{j,t} \right) c_{j,t}.
+\end{equation}
+Firms have a heuristic mark-up rule driven by the evolution of individual market shares:
+\begin{equation}
+	\mu_{j,t} =
+	\begin{cases}
+		\mu_{j,t-1} \left( 1 + \upsilon \frac{ f_{j,t-1} - f_{j,t-2} }{ f_{j,t-2} } \right) & \mbox{ if } f_{j,t-1} > f_{min}^2 \\
+		\mu_{j,t-1} & \mbox{ otherwise },
+	\end{cases}
+\end{equation}
+with parameters $\upsilon \in \mathbb{R}_+$ and $f_{min}^2 \in \mathbb{R}_+$ (the minimum share to stay in market).
+
+Unfilled demand $l_{j,t}$ is the difference between actual demand $D_{j,t}$ firm $j$ gets and its effective production $Q_{j,t}$ plus existing inventories $N_{j,t}$ from past periods, if any:
+\begin{equation}
+	l_{j,t} = \max \left( \frac{ D_{j,t} }{ p_{j,t} } - \left( Q_{j,t} + N_{j,t} \right), 0 \right).
+\end{equation}
+
+The quality of consumer-good produced by firm $j$ is determined by its average (log) skill level, considering each worker $\ell$ skills $s_{\ell,t}$:
+\begin{equation}
+	q_{j,t} = \frac{1}{L_{j,t-1}} \sum_{ \ell \in \{L_{j,t-1}\} } \log \left( s_{\ell,t-1} \right),
+	\label{eqquality}
+\end{equation}
+being $\{L_{j,t}\}$ the set of workers employed by firm, and $L_{j,t}$ the number of workers in the set.
+
+
+\subsection*{Profits, entry and exit}
+
+Firms (gross) profits are computed using the standard accounting conventions:
+\begin{equation}
+	\Pi_{i|j,t} = p_{i|j,t} D_{i|j,t} + r_{t-1}^D NW_{i|j,t-1} - W_{i|j,t} - r_{i|j,t-1}^{deb} Deb_{i|j,t-1},
+\end{equation}
+where $p_{i|j,t}$ is the price charged by firm $i$ (capital-good) or $j$ (consumption-good) on the demand $D_{i|j,t}$ effectively fulfilled, $r_{t}^D$ is the interest rate paid by bank on firm deposits (net worth) $NW_{i|j,t}$, $W_{i|j,t}$ are the wages paid (payroll), and $r_{i|j,t}^{deb}$ is the applicable interest rate for the firm outstanding debt (loans) $Deb_{i|j,t}$.
+
+When profits are positive, firms must pay taxes $Tax_{i|j,t} = tr \Pi_{i|j,t}$, $tr \in [0, 1]$ is the applicable rate, a parameter. In this case, worker bonus $Bon_{j,t}$ (see above), and dividends $Div_{i|j,t} = d_{1|2} \Pi_{i|j,t}$ may be also paid ($d_1, d_2 \in [0, 1]$ are parameters). Dividends are distributed proportionally to the equity $Eq_{\ell,t}$ hold by workers. The outstanding cash flow updates the firm net worth, kept as bank deposits:
+\begin{equation}
+	NW_{i|j,t} = NW_{i|j,t-1} + \Pi_{i|j,t} - Tax_{i|j,t} - Bon_{j,t-1} - Div_{i|j,t-1}.
+\end{equation}
+
+Exit is independent from entry. Firms leave the market in the capital-good sector after $n_1 \in \mathbb{N}$ periods without sales, a parameter. In the consumption-good market, firm $j$ exits when market share $f_{j,t}$ goes below the parameter $f_{min}^2 \in [0, 1]$. In both cases, any residual net worth $NW_{i|j,t}^{exit}$ of the firm is returned to the bank and/or the shareholders, according to parameters $Deb_0^{1|2}$. Outstanding loans and stock not covered by residual net worth are written off (bad debt for banks, equity reduction for shareholders). In both sectors, firms also exit whenever bankrupt, defined by a negative net worth $NW_{i|j,t} < 0$. In this case, all outstanding debt and equity represent losses to the firm counterparties. Equity losses are shared by workers according to the share in the total equity $Eq_{\ell,t-1} / \sum_\ell{ Eq_{\ell,t-1} }$.
+
+Prospective firms in both sectors decide on entry based on the number $F_{t-1}^z$ ($z=k,c$) of firms in industry and the financial conditions of incumbents. The number of entrants in the capital- ($k$) or consumption-good ($c$) sector ()is:
+\begin{equation}
+	{entry}_t^z =\max \left( \left[ o \pi_t^z + ( 1 - o ) {MA}_t^z \right] F_{t-1}^z, \quad 0 \right), \qquad z=k,c,
+\end{equation}
+being $o \in [0, 1]$ a mix parameter and $\pi_t^z$ a uniform random draw on the fixed support $[\munderbar{x}_2^z,\bar{x}_2^z]$ representing the idiosyncratic component in the entry process. Sectoral market attractiveness ${MA}_t^z$ is evaluated based on the dynamics of firms' balance sheets:
+\begin{equation}
+	{MA}_t^z = {MC}_t^z - {MC}_{t-1}^z\qquad \text{bounded to } [\munderbar{x}_2^z,\bar{x}_2^z],
+\end{equation}
+defined as the (log) ratio between the industry-aggregated stocks of liquid assets $NW_{t-1}^z$ (bank deposits) and debt $Deb_{t-1}^z$ (bank loans):
+\begin{equation}
+	{MC}_t^z = \log NW_{t-1}^z - \log Deb_{t-1}^z.
+\end{equation}
+
+Entry is costly, as firms require funding to cover the required operation and (consumption-good firms only) capital expenditures. Entry can be funded by bank debt, shareholder equity, or a mix of both, according to parameters $Deb_0^1, Deb_0^2 \in [0, 1]$ defining the share of debt for the capital- and the consumption-good sectors, respectively. When an entry loan is required, firm can only enter the market when it secures the demanded funding from the associated bank. When equity is used, the corresponding new stock $Eq_{i|j,t}^{entry}$ is bought by workers in the proportion of the share in total savings $Sav_{\ell,t}^{acc} / \sum_\ell{ Sav_{\ell,t}^{acc} }$. If $Sav_{\ell,t}^{acc} < Eq_{\ell,t}^{entry}$ for worker $\ell$, savings may get negative until next period and limit desired consumption $C_{\ell,t+1}^d$.
+
+
+\subsection*{Banking}
+
+There are $B$ commercial banks (subscript $k$) which take deposits and provide credit to firms. Bank-firm pairs are set randomly and are stable along firms' lifetime. Bank profits come from interest received on loans $Loans_{k,t}$, reserves at the central bank $Res_{k,t}$, and sovereign bonds $Bonds_{k,t}^b$ deducted from interest paid on deposits $Depo_{k,t}$ and liquidity loans from central bank $Loans^{cb}_{k,t}$, and losses from defaulted loans $BadDeb_{k,t}$:
+\begin{multline}
+	\Pi^b_{k,t} = i_{k,t}^b + r_{t-1}^{res} Res_{k,t-1} + r_{t-1}^{bonds} Bonds_{k,t-1}^b \\
+	- r_{t-1}^D Depo_{k,t-1} - r_{t-1} Loans^{cb}_{k,t-1} - BadDeb_{k,t},
+\end{multline}
+being $i_{k,t}^b$ the income from loan interest, $r_t^{res}$, $r_t^{bonds}$, $r_t^D$, and $r_t$, the interest rates on bank reserves, sovereign bonds, deposits, and liquidity loans (prime rate), respectively. The interest rate structure is set so $r_t^D = ( 1 - \mu_D ) r_t$, $r_t^{res} = ( 1 - \mu_{res} ) r_t$, $r_t^{bonds} = ( 1 - \mu_{bonds} ) r_t$, $r_t^{deb} = ( 1 + \mu_{deb} ) r_t$, and $r_t^D \le r_t^{res} \le r_t^{bonds} \le r_t \le r_t^{deb}$. $( \mu_D, \mu_{res}, \mu_{bonds}, \mu_{deb} ) \in \mathbb{R}_+^4$ are parameters.
+
+Banks charge interest rates on loans according to the credit ranking of clients, grouped in four quartile classes $q = 1,2,3,4$. So, effective interest rate of firm $j$ in credit class $q_{j,t}$ is:
+\begin{equation}
+	r_{i|j,t}^{deb} = \left( 1 + \left[  q_{Ij,t} - 1 \right]  k_{const} \right) r_t^{deb},
+\end{equation}
+$r_{i|j,t}^{deb}$ is the base interest rate on deposits, and $k_{const} \in \mathbb{R}_+$ is a scaling parameter. Total income from loan interest of bank $k$ is computed as:
+\begin{equation}
+	i_{k,t}^b = \sum_{j \in \Omega_{t-1}} r_{i|j,t-1}^{deb} Deb_{i|j,t-1},
+\end{equation}
+$\Omega_t$ is the set of customers of bank $k$, and $Deb_{j,t}$ is the debt from loans of firm $j$.
+
+Bank net worth/capital $NW^b_{k,t}$ is the difference between assets and liabilities: loans $Loans_{k,t}$, plus required reserves at the central bank $Res_{k,t}$, plus excess reserves $ExRes_{k,t}$, plus sovereign bonds stock $Bonds_{k,t}$, less deposits $Depo_{k,t}$, and less liquidity loans from central bank $Loans^{cb}_{k,t}$:
+\begin{equation}
+	NW_{k,t}^b = Loans_{k,t} + Res_{k,t} + ExRes_{k,t} + Bonds_{k,t}^b - Depo_{k,t} - Loans_{k,t}^{cb}.
+\end{equation}
+Excess reserves (cash at vault) are updated according to the bank cash flow:
+\begin{equation}
+	ExRes_{k,t} = ExRes_{k,t-1} + \Pi_{k,t}^b - Tax_{k,t}^b - \Delta Res_{k,t} - \Delta Bonds_{k,t}^b,
+\end{equation}
+where $\Delta Res_{k,t}$ and $\Delta Bonds_{k,t}$ are the changes on the stocks of required reserves and sovereign bonds from previous period, and $Tax^b_{k,t}$ is the bank tax on profits, if any.
+
+
+\subsection*{Government and central bank}
+
+Government taxes firm and bank profits and worker income at fixed rates $(tr, {tr}_{in}) \in \mathbb{R}_+^2$, respectively:
+\begin{equation}
+	Tax_t = tr \left( \Pi_t^1 + \Pi_t^2 + \Pi_t^b \right) + {tr}_{in} ~ In_t^,
+\end{equation}
+where $\Pi_t^1$, $\Pi_t^2$ and $\Pi_t^b$ are the aggregate total profits of the capital-good, the consumer-good and the banking sectors, respectively, and $In_t$ is the gross income of workers. Government pays to unemployed workers a benefit $w_t^u$ which is a fraction of the current average wage $\bar{w}_{t}$:
+\begin{equation}
+	w_t^u= \psi \bar{w}_{t-1},
+\end{equation}
+where $\psi \in [0,1]$ is a parameter. The recurring total public expenditure $G_t$, composed by transfers $G_t^{trf}$, including unemployment benefits, and effective consumption $G_t^c$, and the public total deficit (surplus) are:
+\begin{equation}
+	G_t = G_t^{trf} + G_t^c,
+	\qquad G_t^{trf} = w_t^u \left( L^S-L^D_t \right) + G_t^{ed} + G_t^{train},
+\end{equation}
+\begin{equation}
+	Def_t = G_t - Tax_t - \Pi_t^{cb} + G_{t-1}^{bail} + r_{t-1}^{bonds} Bonds_{t-1} - r_{t-1}^{res} Depo_{t-1}^g,
+\end{equation}
+$G_t^{ed}, G_t^{train}$ are the transfers (salaries) for education and training, if applicable, $G_t^{bail}$ is the net cost of rescuing (bail-out) the banking sector during financial crises, if any, $Bonds_{t-1}$ is the stock of outstanding sovereign bonds (at banks and central bank), and $Depo_{t}^g$ are the accumulated government surpluses kept at the central bank. The operational result (profits/losses) of the central bank is:
+\begin{equation}
+	\Pi_t^{cb} = r_{t-1} Loans_{t-1}^{cb} + r_{t-1}^{bonds} Bonds_{t-1}^{cb} - r_{t-1}^{res} \left( Res_{t-1} + Depo_{t-1}^g \right),
+\end{equation}
+$Loans_t^{cb}$ are the liquidity loans provided to banks, $Bonds_t^{cb}$, the government bonds hold by central bank, and $Res_{t}$, the banks' reserves kept at the central bank.
+
+Government issues new sovereign bonds with average maturity $\sigma_{bonds} \in \mathbb{R}^*_+$ to finance the public deficit (if $Def_t > 0$), and to pay maturing bonds, if $Depo_{t-1}^g = 0$. Banks buy bonds when there is free cash after required reserves $Res_{k,t}$ are deposited at the central bank, or sell them, otherwise, trying to minimize excess reserves $ExRes_{k,t}$ (money at vault). The central bank always clears the sovereign bond market.
+
+Finally, the consolidated public sector debt, if any, is updated:
+\begin{equation}
+	Deb_t = Deb_{t-1} + Def_t.
+\end{equation}
+
+
+\subsection*{Government consumption and fiscal policy}
+
+Government desired public consumption expenditure is $G_t^{c,d}$, but effectively fulfilled public consumption $G_t^c$ depends on the market supply, and forms no inventories:
+\begin{equation}
+	G_t^{c,d} = g_0 ~ Y_t^{mt} + s_t^g, \qquad s_t^g \ge 0,
+\end{equation}
+where $g_0 \in [0, 1]$ is a parameter expressed as a share of the (nominal) medium-term GDP log-linear trend:
+\begin{equation}
+	\begin{gathered}
+		\log{ Y_t^{mt} } = a + b \left( T_{mt} + 1 \right),\\
+		a = \bar{Y} - b \left( T_{mt} + 1 \right),
+		\qquad \bar{Y} = \frac{ 1 }{ T_{mt} } \sum_{ v = 1 }^{ T_{mt} } \log{ Y_{t-v} },\\
+		b = \dfrac{ T_{mt} \left( T_{mt} + 1 \right) \bar{Y} - \sum_{ v = 1 }^{ T_{mt} } v \log{ Y_{t-T_{mt}+v-1} } }{ T_{mt} \left( T_{mt} + 1 \right)^2 - \sum_{ v = 1 }^{ T_{mt} } v^2 },
+	\end{gathered}
+\end{equation}
+$T_{mt} \in \mathbb{N}$ is a parameter defining the medium-term horizon, and $Y_t$ is the nominal GDP in period $t$.
+
+A fiscal policy shock $s_t^g$ may be applied during $T_{sh} \in \mathbb{N}$ periods, a parameter:
+\begin{equation}
+	s_t^g =
+	\begin{cases}
+		y_{sh} ~ Y_{t-1} & \mbox{ if shock is applied in } t \\
+		s_{t-1}^g & \mbox{ if shock was applied in } \left[ t - T_{sh} + 1, t - 1 \right] \\
+		0 & \mbox{ otherwise },
+	\end{cases}
+\end{equation}
+where $y_{sh} \in [0, 1]$ is the relative shock size parameter.
+
+A income-tax shock $s_t^{in}$ reducing the income tax rate for $T_{sh}$ periods is also possible:
+\begin{equation}
+	s_t^{in} =
+	\begin{cases}
+		{tr}_{in} ~ \dfrac{ y_{sh} ~ Y_{t-1} }{ Tax_{t-1}^w } & \mbox{ if shock is applied in } t \\
+		s_{t-1}^{in} & \mbox{ if shock was applied in } \left[ t - T_{sh} + 1, t - 1 \right] \\
+		0 & \mbox{ otherwise },
+	\end{cases}
+\end{equation}
+${tr}_{in} \in [0, 1]$ is the regular income tax rate, a parameter, and $Tax_t^w$ is income tax total revenue from workers.
+
+
+\subsection*{Macro closure}
+
+The effective consumption $C_t$ is bounded by the desired aggregated demand from workers $C_t^{w,d}$ and government $G_t^{c,d}$, and the supply $S^c_t$ of the consumption-good sector:
+\begin{equation}
+	C_t = \min \left( C_t^{w,d} + G_t^{c,d}, \quad S_t^2 \right) = C_t^w + G_t^c, \qquad S_t^c = \sum_{j} p_{j,t} Q_{j,t},
+\end{equation}
+where $C_t^w$ and $G_t^c$ are the effective consumption of workers and government, respectively. Consumption-good shortages are allocated proportionally among agents.
+
+The model applies the standard national account identities by the aggregation of agents' stocks and flows. The (nominal) GDP $Y_t$ is equal to the aggregate value added by firms (at current prices), that is, the sum of aggregate supply of capital- and consumption-goods, $S^k_t$ and $S^c_t$, respectively. There are no intermediate goods. $Y_t$ is also equal to the sum of the effective consumption $C_t$, the total nominal investment $\widetilde{I}_t$, the net exports $X_t^{net}$, and the change in firm's inventories at current prices $\Delta \widetilde{N}_t$:
+\begin{equation}
+	S^k_t + S^c_t = Y_t = C_t + \widetilde{I}_t + X_t^{net} + \Delta \widetilde{N}_t.
+\end{equation}
+
+For further details, see \citet{dosi2010schumpeter}, \citet{dosi2015fiscal}, \citet{dosi2017flexibility} and \citet{fanti2022education}.
+
+
+\section*{Appendix B}
+\label{appendixB}
+
+Global sensitivity analysis (SA) is performed for $t \in [200,400]$ on a set of output variables (the ``metrics'') relevant to the current discussion, namely XXXXXXXXXXXXXXXXX.\footnote{Other relevant metrics, like the macro aggregates' growth rates, the inequality measures, and the industrial performance indicators were already evaluated in previous papers based on the labour-augmented K+S model and are not be replicated here. The general results from these past analyses indicate a relatively small dependence of the model qualitative results on the chosen parametrization.} All the model's parameters and initial conditions, their calibration values, as well as the key SA tests statistics, are detailed in the following.
+
+The K+S model is calibrated using the values presented in Table \ref{Par} below (column \textsc{Value}) for the parameters and initial conditions. SA is performed across the entire parametric space, inside the closed region defined by Table \ref{Par} (columns \textsc{Min.} and \textsc{Max.}), and the synthetic results are reported (columns \textsc{$\mu^*$}, \textsc{Direct} and \textsc{Interaction}) for the most sensitive among the tested output variables (results for the remaining variables can be requested to the authors). Two SA methodologies are employed, elementary effects (EE) and Sobol variance decomposition (SVD).
+
+EE analysis is summarized by the $\mu^*$ statistic in Table \ref{Par}, which is a measure of the direct absolute effects of each factor (parameter or initial condition) on the chosen output variable, being the parametric space rescaled to the $[0,1]$ interval on each dimension. The statistical significance of this statistic, the probability of not rejecting $H_0:\mu^*_i = 0$ is also evaluated and indicated by the usual asterisk convention. The EE computation is performed directly over model samples from an optimized 10-trajectory one-at-a-time design of experiments (DoE). Each DoE sampling point is sampled three times, to compensate for stochastic components in the model.
+
+The SVD analysis is reported in Table \ref{Par} by two statistics: (\textsc{Direct} column) the decomposition of the direct influence of each factor on the variance of the tested output variable (adding up to 1), and (\textsc{Interaction} column) its indirect influence share, by interacting with other factors (non-linear/non-additive effects). The SVD analysis is performed using a Kriging meta-model fitted using samples from a near-orthogonal Latin hypercube DoE. Each DoE point is sampled 10 times. Out of the XXXX parameters and initial conditions (the ``factors'') in this K+S version, as a first step we apply the Morris elementary effects (EE) method.\footnote{Briefly, EE proposes both a specific design of experiments, to efficiently sample the parametric space under a multi-path, one-factor-at-a-time strategy, and a absolute importance statistic to evaluate direct and indirect (non-linear/non-additive) effects of the parameters on model results and their statistical significance (\citealp{morris1991factorial}, \citealp{saltelli2008global}).} This is important because it allows identifying those factors which significantly affect the selected model metrics. The EE analysis (Table \ref{Par}) indicates that XXXXXXXX is the metric sensitive to the larger number of those factors (XX) while XXXXXX is the least sensitive, with XX influential factors.\footnote{The selection criteria is to consider the top 80\% EE contributors at 5\% significance.} In total, XX unique \emph{relevant} factors were identified after discarding duplicates.
+
+In order to quantify the effect of each of relevant factor over the selected metrics, directly or in interaction with other factors, as a second step we perform a Sobol Variance Decomposition (SVD).\footnote{The SVD is a variance-based, global SA method consisting in the decomposition of the chosen metrics variance into shares according to the contribution of the variances of the factors selected for analysis. This methodology deals better with non-linearities and non-additive interactions than EE or the traditional local SA methods. It allows to precisely disentangle both direct and interaction quantitative effects of the factors over the entire parametric space (\citealp{sobol1993sensitivity}, \citealp{saltelli2008global}).} Because of the high computational cost to produce the SVD using the original simulation model, a simplified version of it — a meta-model — is estimated using the Kriging method and employed for the SVD.\footnote{To summarize, the Kriging meta-model ``mimics'' the K+S model using a simpler, mathematically-tractable approximation, fitted over a representative sample of the original model response surface. Kriging is a spatial interpolation method that under fairly general assumptions provides the best linear unbiased predictors for the response of complex, non-linear computer simulation models (\citealp{williams2006gaussian}, \citealp{salle2014efficient}).} The meta-model is estimated by numerical maximum likelihood using a set of observations multi-sampled from the original model using a high-efficiency, nearly-orthogonal Latin hypercube design of experiments \citep{cioppa2012efficient}.
+
+The SVD results (Table \ref{Par}) indicate a smaller subset of XX \emph{important} factors for the chosen metrics.\footnote{The selection criteria is to consider the top 80\% SVD contributors.} These factors, in overall order of importance, define (i) XXXXXXXXXX, (ii) XXXXXXXXX.
+
+\begin{landscape}
+
+\begin{table}[h]
+\centering
+\footnotesize
+\begin{tabular}{llcccccc}
+\toprule
+\textsc{Symbol} 				& \textsc{Description} 									& \textsc{Value}	& \textsc{Min.}	& \textsc{Max.}	& \textsc{$\mu^*$}	& \textsc{Direct}	& \textsc{Interaction} \\
+\midrule
+\multicolumn{2}{l}{\textbf{Education}} \\
+$\epsilon_{ed}$					& Public education expenditure as share of GDP			& 0.050				& 0.010			& 0.100			&					&					&	 \\
+$\epsilon_{ad}$					& Education expenditure of advanced country (\%GDP)		& 0.050				& 0.040			& 0.100			&					&					&	 \\
+$\vartheta_{ed}$				& Sensitivity of education attainment to expenditure	& 0.500				& 0.000			& 2.000			&					&					&	 \\
+$\tau_{ed}$						& Leverage of education on productivity					& 0.500				& 0.000			& 2.000			&					&					&	 \\
+$(\alpha_{ed},\beta_{ed})$		& Beta distribution parameters (education attainment)	& (6.560,3.600)		& (4.000,5.000)	& (9.000,2.000)	&					&					&	 \\
+$(\theta_2,\theta_3)$			& Labour demand share for secondary/tertiary education	& (0.550,0.250)		& (0.300,0.100)	& (0.700,0.300)	&					&					&	 \\
+$(\phi_2,\phi_3)$				& Wage premium from secondary/tertiary education		& (0.250,0.200)		& (0.000,0.000)	& (1.000,1.000)	&					&					&	 \\
+\midrule
+\multicolumn{2}{l}{\textbf{Consumption}} \\
+$C_{rec}$ 						& Unfilled past consumption recover limit				& 0.200				& 0.100			& 0.500			& 					& 					& 	 \\
+$T_{exp}$ 						& Time horizon to prices expectation formation			& 4.000				& 1.000			& 8.000			& 					& 					& 	 \\
+$\alpha_c$ 						& Importance of current income on current consumption	& 0.360				& 0.200			& 0.500			& 					& 					& 	 \\
+$\beta_c$ 						& Importance of past consumption on current consumption	& 0.610				& 0.400			& 0.700			& 					& 					& 	 \\
+$\gamma_c$ 						& Consumption-reduction floor factor					& 0.950				& 0.700			& 0.990			& 					& 					& 	 \\
+$\omega_c$ 						& Past-consumption time weight							& 0.330				& 0.200			& 0.500			& 					& 					& 	 \\
+\midrule
+\multicolumn{2}{l}{\textbf{Labour market}} \\
+$\delta$						& Labour force growth rate (per country)				& (0.001,-0.001)	& (0.000,-0.002)& (0.002,0.000)	& 					& 					& 	 \\
+$\epsilon$						& Minimum desired wage increase rate					& 0.020				& 0.005			& 0.200			& 					& 					& 	 \\
+$\tau_T$						& Skills accumulation rate on tenure					& 0.010				& 0.001			& 0.100			& 					& 					& 	 \\
+$\tau_U$						& Skills deterioration rate on unemployment				& 0.010				& 0.001			& 0.100			& 					& 					& 	 \\
+$T_r$ 							& Number of periods before retirement (work life)		& 120				& 60			& 240			& 					& 					& 	 \\
+$T_s$ 							& Number of wage memory periods							& 4					& 1				& 8				& 					& 					& 	 \\
+$\omega$						& Number of firms to send applications (employed)		& 5					& 1				& 20			& 					& 					& 	 \\
+$\omega_u$						& Number of firms to send applications (unempl.)		& 10				& 1				& 20			& 					& 					& 	 \\
+$\psi_2$ 						& Aggregate productivity pass-trough					& 1.000				& 0.950			& 1.050			& 					& 					& 	 \\
+$\psi_4$ 						& Firm-level productivity pass-trough					& 0.500				& 0.000			& 1.000			& 					& 					& 	 \\
+$\psi_6$						& Share of firm free cash flow paid as bonus			& 0.200				& 0.000			& 0.500			& 					& 					& 	 \\
+\bottomrule
+(continue...)
+\end{tabular}
+\end{table}
+
+\begin{table}[ht]
+\centering
+\footnotesize
+\begin{tabular}{llcccccc}
+\toprule
+\textsc{Symbol} 				& \textsc{Description} 									& \textsc{Value}	& \textsc{Min.}	& \textsc{Max.}	& \textsc{$\mu^*$}	& \textsc{Direct}	& \textsc{Interaction} \\
+\midrule
+\multicolumn{2}{l}{\textbf{Technology}} \\
+$\eta$							& Maximum machine-tools useful life						& 19				& 10			& 40			& 					& 					& 	 \\
+$\nu$ 							& R\&D investment propensity over sales					& 0.040				& 0.010			& 0.200			& 					& 					& 	 \\
+$\xi$ 							& Share of R\&D expenditure in imitation				& 0.500				& 0.200			& 0.800			& 					& 					& 	 \\
+$b$								& Payback period for machine replacement				& 8					& 1				& 20			& 					& 					& 	 \\
+$m_1$ 							& Capital productivity in capital-good sector			& 1					& 0.1			& 10			& 					& 					& 	 \\
+$m_2$ 							& Capital productivity in consumer-good industries		& 10					& 1				& 100			& 					& 					& 	 \\
+$(\alpha_1,\beta_1)$ 			& Beta distribution parameters (innovation process) 	& (3,3)				& (1,1)			& (5,5)			& (,)				& (,)				& (,) \\
+$(\alpha_2,\beta_2)$ 			& Beta distribution parameters (entrant productivity)	& (2,4)				& (1,1)			& (5,5)			& (,)				& (,)				& (,) \\
+$(\zeta_1,\zeta_2)$				& Search capabilities for innovation/imitation 			& (0.100,0.100)		& (0.050,0.050)	& (0.200,0.200)	& (,)				& (,)				& (,) \\
+$[\munderbar{x}_1,\bar{x}_1]$	& Beta distribution support (innovation process )		& [-0.150,0.150]	& [-0.300,0.100]& [-0.100,0.300]& (,)				& (,)				& (,) \\
+\midrule
+\multicolumn{2}{l}{\textbf{Industrial dynamics}} \\
+$\gamma$ 						& Share of new customers for capital-good firm			& 0.500				& 0.200			& 0.800			& 					& 					& 	 \\
+$\iota$ 						& Desired inventories share								& 0.100				& 0.000			& 0.300			& 					& 					& 	 \\
+$\kappa_{max}$					& Maximum threshold to capital expansion				& 0.500				& 0.100			& 1.000			& 					& 					& 	 \\
+$\mu_1$ 						& Mark-up in capital-good sector						& 0.100				& 0.010			& 0.200			& 					& 					& 	 \\
+$\omega_1$ 						& Firm competitiveness weight for price					& 1.000				& 0.200			& 5.000			& 					& 					& 	 \\
+$\omega_2$ 						& Firm competitiveness weight for unfilled demand 		& 1.000				& 0.200			& 5.000			& 					& 					& 	 \\
+$\omega_3$ 						& Firm competitiveness weight for quality		 		& 1.000				& 0.200			& 5.000			& 					& 					& 	 \\
+$\chi$							& Replicator dynamics coefficient (inter-firm)			& 1.000				& 0.200			& 5.000			& 					& 					& 	 \\
+$\upsilon$ 						& Mark-up adjustment coefficient						& 0.040				& 0.010			& 0.100			& 					& 					& 	 \\
+$f^2_{min}$ 					& Min share to firm stay in consumption-good sector		& $10^{-5}$			& $10^{-6}$		& $10^{-3}$		& 					& 					& 	 \\
+$n_1$ 							& Min periods to firm stay in capital-good sector		& 8.000				& 1.000			& 8.000			& 					& 					& 	 \\
+$o$ 							& Weight of market conditions for entry decision		& 0.500				& 0.000			& 1.000			& 					& 					& 	 \\
+$u$ 							& Planned utilization by consumption-good entrant		& 0.750				& 0.500			& 1.000			& 					& 					& 	 \\
+$x_5$ 							& Max technical advantage of capital-good entrant		& 0.300				& 0.000			& 1.000			& 					& 					& 	 \\
+$[\Phi_1,\Phi_2]$ 				& Min/max capital ratio for consumer-good entrant		& [0.100,0.900]		& [0.000,0.500]	& [0.500,1.000]	& (,)				& (,)				& (,) \\
+$[\Phi_3,\Phi_4]$ 				& Min/max net wealth ratio for capital-good entrant		& [0.100,0.900]		& [0.000,0.500]	& [0.500,1.000]	& (,)				& (,)				& (,) \\
+$[\munderbar{x}_2,\bar{x}_2]$	& Entry distribution support for entrant draw			& [-0.150,0.150]	& [-0.300,0.100]& [-0.100,0.300]& (,)				& (,)				& (,) \\
+$[F^1_{min},F^1_{max}]$			& Min/max number of capital-good firms					& [1,100]			& [1,20]		& [20,400]		& (,)				& (,)				& (,) \\
+$[F^2_{min},F^2_{max}]$			& Min/max number of consumer-good firms					& [1,100]			& [1,20]		& [20,400]		& (,)				& (,)				& (,) \\
+\bottomrule
+(continue...)
+\end{tabular}
+\end{table}
+
+\begin{table}[h]
+\centering
+\footnotesize
+\begin{tabular}{llcccccc}
+\toprule
+\textsc{Symbol} 				& \textsc{Description} 									& \textsc{Value}	& \textsc{Min.}	& \textsc{Max.}	& \textsc{$\mu^*$}	& \textsc{Direct}	& \textsc{Interaction} \\
+\midrule
+\multicolumn{2}{l}{\textbf{Financial market}} \\
+$k_{const}$						& Interest rate difference between credit score steps	& 0.100				& 0.000			& 0.250			& 					& 					& 	 \\
+$r_T$ 							& Target prime interest rate 							& 0.010				& 0.005			& 0.050			& 					& 					& 	 \\
+$\beta_b$						& Bank sensitivity to financial fragility			 	& 1.000				& 0.500			& 2.000			& 					& 					& 	 \\
+$\mu_D$							& Mark-down of interest on deposits under prime rate 	& 0.900				& 0.750			& 1.000			& 					& 					& 	 \\
+$\mu_{bonds}$					& Mark-down of interest on bonds under prime rate		& 0.500				& 0.250			& 1.000			& 					& 					& 	 \\
+$\mu_{deb}$						& Mark-up of interest on debt over prime rate			& 0.300				& 0.100			& 0.500			& 					& 					& 	 \\
+$\mu_{res}$						& Mark-down of interest on reserves to prime rate		& 0.600				& 0.500			& 1.000			& 					& 					& 	 \\
+$\tau_b$						& Minimum bank capital adequacy rate					& 0.080				& 0.050			& 0.150			& 					& 					& 	 \\
+$\Lambda$						& Prudential limit on debt (sales multiple)				& 3					& 1				& 4				& 					& 					& 	 \\
+\midrule
+\multicolumn{2}{l}{\textbf{International trade}} \\
+$\gamma_e$						& Sensitivity of exchange rate to trade unbalance		& 0.100				& 0.020			& 0.500			& 					& 					& 	 \\
+$(\delta_1,\delta_2)$			& Country competitiveness weight for price and quality	& (1.000,1.000)		& (0.200,0.200)	& (5.000,5.000)	& (,)				& (,)				& (,) \\
+$\chi_m$ 						& Replicator dynamics coefficient for import share		& 0.010				& 0.001			& 0.01			& 					& 					& 	 \\
+$\chi_x$						& Replicator dynamics coefficient for export shares		& 0.010				& 0.001			& 0.01			& 					& 					& 	 \\
+$f_0$							& Replicator dynamics minimum import/export share 		& 0.200				& 0.050			& 0.400			& 					& 					& 	 \\
+$f_{max}$						& Replicator dynamics maximum import share				& 0.500				& 0.000			& 0.800			& 					& 					& 	 \\
+$({tr}_{mc},{tr}_{mk})$			& Duty rate on imports of consumption/capital goods		& (0.000,0.000)		& (0.000,0.000)	& (0.300,0.300)	& (,)				& (,)				& (,) \\
+$({tr}_{x1},{tr}_{x2})$			& Duty rate on exports of capital/consumption sectors	& (0.000,0.000)		& (0.000,0.000)	& (0.300,0.300)	& (,)				& (,)				& (,) \\
+\midrule
+\multicolumn{2}{l}{\textbf{Policy}} \\
+$T_{mt}$ 						& Medium-term GDP evaluation period						& 16.00				& 8.000			& 20.00			& 					& 					& 	 \\
+$T_{sh}$ 						& Fiscal policy shock period							& 20.00				& 10.00			& 40.00			& 					& 					& 	 \\
+$g_0$ 							& Target public consumption to GDP ratio				& 0.100				& 0.000			& 0.200			& 					& 					& 	 \\
+$tr$ 							& Tax rate on firm and bank profits						& 0.100				& 0.000			& 0.300			& 					& 					& 	 \\
+${tr}_{in}$						& Tax rate on worker income								& 0.150				& 0.000			& 0.300			& 					& 					& 	 \\
+$x_6$ 							& Technical gap of statized capital-good firm			& 0.000				& -0.300		& 0.300			& 					& 					& 	 \\
+$y_{sh}$ 						& Fiscal policy size per period as fraction of GDP		& 0.010				& 0.005			& 0.020			& 					& 					& 	 \\
+$\Phi_b$ 						& Bank bail-out reference as share of incumbent	wealth	& 0.500				& 0.000			& 1.000			& 					& 					& 	 \\
+$(\gamma^1_g,\gamma^2_g)$ 		& Minimum productivity/size ratio to allow statization	& 1.000				& 0.500			& 2.000			& (,)				& 					& 	 \\
+$\phi$ 							& Unemployment subsidy rate on average wage				& 0.400				& 0.000			& 1.000			& 					& 					& 	 \\
+\bottomrule
+(continue...)
+\end{tabular}
+\end{table}
+
+\begin{table}[h]
+\centering
+\footnotesize
+\begin{tabular}{llcccccc}
+\toprule
+\textsc{Symbol} 				& \textsc{Description} 									& \textsc{Value}	& \textsc{Min.}	& \textsc{Max.}	& \textsc{$\mu^*$}	& \textsc{Direct}	& \textsc{Interaction} \\
+\midrule
+\multicolumn{2}{l}{\textbf{Initial conditions}} \\
+$\mu^2_0$						& Initial mark-up in consumption-good industries		& (0.2,0.3)			& (0.1,0.1)		& (0.5,1.0)		& 					& 					& 	 \\
+$w_0^{min}$						& Initial minimum wage and social benefit floor			& 0.500				& 0.100			& 1.000			& 					& 					& 	 \\
+$L^S_0$ 						& Number of workers 									& $2.5 10^5$		& $1.3 10^5$	& $5.0 10^5$	& 					& 					& 	 \\
+$\Lambda_{0}$					& Prudential limit on debt (initial fixed floor)		& 1000				& 500			& 2000			& 					& 					& 	 \\
+$B$								& Number of banks										& 10				& 5				& 15			& 					& 					& 	 \\
+$NW^b_0$						& Multiple on minimum initial net wealth of banks		& 10				& 1				& 100			& 					& 					& 	 \\
+$(Deb^1_0,Deb^2_0)$				& Debt-to-equity ratio of capital/consumption-good firms& (1,1)				& (1,1)			& (1,1)			& NA				& NA				& NA \\
+$(F^1_0,F^2_0)$					& Initial number of capital/consumption-good firms		& (10,50)			& (5,20)		& (20,200)		& (,)				& (,)				& (,) \\
+$(NW^1_0,NW^2_0)$ 				& Multiple on initial net wealth for capital/consumption& (1,2)				& (0,0)		& (10,10)			& (,)				& (,)				& (,) \\
+\bottomrule
+\end{tabular}
+\caption{Model parameters and initial conditions, calibration values, minimum-maximum range for sensitivity analysis, elementary effects $\mu^*$ statistic ($n=XXXX$ samples) and Sobol decomposition direct and interaction effects indexes ($n=XXXX$ samples). \\
+Baseline values. Sensitivity analysis statistics relative to XXXXXXXXXXXXXXX (the most sensitive variable). \\
+$\mu^*$ statistic estimated using factors rescaled to $[0,1]$. $\mu^*$ significance: *** 0.1\% | ** 1\% | * 5\% | (no asterisk) not significant at 5\% level.}
+\label{Par}
+\end{table}
+\end{landscape}
+
+
+\section*{Appendix C}
+\label{appendixC}
+
+\begin{landscape}
+\begin{table}
+\centering
+\small
+\renewcommand{\arraystretch}{1.8}
+\begin{tabular}{l|c|c|c|c|c|c|c|c}
+\toprule
+						& \textbf{Workers}		& \multicolumn{2}{c|}{\textbf{Firms}}				& \textbf{Banks}	& \textbf{Central bank}	& \textbf{Government}	& \textbf{Foreign firms}	& \textbf{$\sum$} \\
+						& (households)			& \textit{capital-good}	& \textit{consumption-good}	&					& 						&						&							& \\
+\hline
+Fixed capital			&						&						& $+K^{nom}_t$				&					&						&						&							& $+K^{nom}_t$ \\
+Equities				& $+Eq^w_t$				& $-Eq^1_t$				& $-Eq^2_t$					&					&						& $+Eq^g_t$				&							& $0$ \\
+Deposits				& $+Sav^{acc}_t$		& $+NW^1_t$				& $+NW^2_t$					& $-Depo_t$			&						&						&							& $0$ \\
+Loans					&						& $-Deb^1_t$			& $-Deb^2_t$				& $+Loans_t$		&						&						&							& $0$ \\
+Monetary base			&						&						&							& $+MB_t$			& $-MB_t$				&						&							& $0$ \\
+Reserves (required)		&						&						&							& $+Res_t$			& $-Res_t$				&						&							& $0$ \\
+Excess reserves			&						&						&							& $+ExRes_t$		& $-ExRes_t$			&						&							& $0$ \\
+Liquidity facilities	&						&						&							& $-Loans^{cb}_t$	& $+Loans^{cb}_t$		&						&							& $0$ \\
+Government bonds		&						& 						&							& $+Bonds^b_t$		& $+Bonds^{cb}_t$		& $-Deb_t$				&							& $0$ \\
+Government deposits		&						& 						&							&					& $-Depo^g_t$			& $+Depo^g_t$			&							& $0$ \\
+International reserves	&						& 						&							&					& $-IntRes_t$			&						& $+IntRes_t$				& $0$ \\
+\hline
+Balance					& $-Bal_t$				& $-Bal^1_t$			& $-Bal^2_t$				& $-Bal^b_t$		& $-Bal^{cb}_t$			& $-Bal^g_t$			& $-Bal^w_t$				& $-K^{nom}_t$ \\
+\hline
+$\sum$					& $0$					& $0$					& $0$						& $0$				& $0$					& $0$					& $0$						& $0$ \\
+\bottomrule
+\end{tabular}%
+\caption{Stock-flow consistency: balance-sheet matrix, single country view.}
+\label{tab:SFC1-0.2}
+\end{table}
+\end{landscape}
+
+
+\begin{landscape}
+\begin{table}
+\centering
+\tiny
+\renewcommand{\arraystretch}{1.5}
+\setlength\tabcolsep{3pt} % default value: 6pt
+\newcommand{\net}{\operatorname{net}}
+\begin{tabular}{l|c|c|c|c|c|c|c|c|c|c|c}
+\toprule
+							& \textbf{Workers}				& \multicolumn{2}{c|}{\textbf{Capital-good firms}}		& \multicolumn{2}{c|}{\textbf{Consumption-good firms}}	& \multicolumn{2}{c|}{\textbf{Banks}}							& \textbf{Central bank}					& \textbf{Government}				& \textbf{Foreign agents}	& \textbf{$\sum$} \\
+							& (households)					& \textit{current}				& \textit{capital}		& \textit{current}				& \textit{capital}		& \textit{current}					& \textit{capital}			&										&									&							& \\
+\hline
+\textbf{Transactions}		&								&								&						&								&						&									&							&										&									&							& \\
+Consumption					& $-C_t^{w,l}$					& 								&						& $+S^{2,l}_t$					&						&									&							&										& $-G_t^c$							&							& $0$ \\
+Investment					&								& $+S^{1,l}_t$					&						&								& $-I^{nom,l}_t$		&									&							&										&									&							& $0$ \\
+Trade, imports				& $-M^c_t$						& 								&						&								& $-M^k_t$				&									&							&										&									& $+X^f_t$					& $0$ \\
+Trade, exports				&								& $+X^k_t$						&						& $+X^c_t$						&						&									&							&										&									& $-M^f_t$					& $0$ \\
+Government transfers		& $+G_t^{trf}$					&								&						&								&						&									&							&										& $-G_t^{trf}$						&							& $0$ \\
+Wages						& $+W_t$						& $-W^1_t$						&						& $-W^2_t$						&						&									&							&										&									&							& $0$ \\
+Taxes, local gov.			& $-Tax^w_t$					& $-Tax^1_t, -Tax^{x1}_t$		&						& $-Tax^2_t, -Tax^{x2}_t$		&						& $-Tax^b_t$						&							&										& $+Tax_t$							& $-Tax^m_t$				& $0$ \\
+Taxes, foreign gov.			&								& $-Tax^{m1,f}_t$				&						& $-Tax^{m2,f}_t$				&						&									&							&										&									& $+Tax^{m,f}_t$			& $0$ \\
+Profits, firms and banks	&								& $-\net \Pi^1_t$				& $+\net \Pi^1_t$		& $-\net \Pi^2_t$				& $+\net \Pi^2_t$		& $-\net \Pi^b_t$					& $+\net \Pi^b_t$			&										&									&							& $0$ \\
+Op. result, central bank	&								&								&						&								&						&									&							& $-\Pi^{cb}_t$							& $+\Pi^{cb}_t$						&							& $0$ \\
+Bonuses						& $+Bon_{t-1}$					&								& 						&								& $-Bon^2_{t-1}$		&									&							&										&									&							& $0$ \\
+Dividends					& $+Div^w_{t-1}$				&								& $-Div^1_{t-1}$		&								& $-Div^2_{t-1}$		&									& $-Div^b_{t-1}$			&										& $+Div^g_{t-1}$					&							& $0$ \\
+New equity expense			& $-Eq^{w,entry}_{t-1}$			&								& $+Eq^{1,entry}_{t-1}$	&								& $+Eq^{2,entry}_{t-1}$	&									&							&										& $-Eq^{g,entry}_{t-1}$				&							& $0$ \\
+Exit remaining net worth	& $+NW^{w,exit}_{t-1}$			&								& $-NW^{1,exit}_{t-1}$	&								& $-NW^{2,exit}_{t-1}$	&									&							&										& $+NW^{g,exit}_{t-1}$				&							& $0$ \\
+Bad debt					&								&								& $+BadDeb^1_{t-1}$		&								& $+BadDeb^2_{t-1}$		& $-BadDeb_{t-1}$					&							&										& $-BadDeb^g_{t-1}$					&							& $0$ \\
+Bail-out					&								&								&						&								&						&									& $+G^{bail}_t$				& $-G^{bail}_t +G^{bail}_{t-1}$			& $-G^{bail}_{t-1}$					&							& $0$ \\
+Interest, deposits			& $+r^D_{t-1} Sav^{acc}_{t-1}$	& $+r^D_{t-1} NW^1_{t-1}$		&						& $+r^D_{t-1} NW^2_{t-1}$		&						& $-r^D_{t-1} Depo_{t-1}$			&							&										&									&							& $0$ \\
+Interest, loans				&								& $-r^{deb}_{t-1} Deb^1_{t-1}$	&						& $-r^{deb}_{t-1} Deb^2_{t-1}$	&						& $+r^{deb}_{t-1} Loans_{t-1}$		&							&										&									&							& $0$ \\
+Interest, reserves			&								&								&						&								&						& $+r^{res}_{t-1} Res_{t-1}$		&							& $-r^{res}_{t-1} Res_{t-1}$			&									&							& $0$ \\
+Interest, liq. facilities	&								&								&						&								&						& $-r_{t-1} Loans^{cb}_{t-1}$		&							& $+r_{t-1} Loans^{cb}_{t-1}$			&									&							& $0$ \\
+Interest, gov. bonds		&								&								&						&								&						& $+r^{bonds}_{t-1} Bonds^b_{t-1}$	&							& $+r^{bonds}_{t-1} Bonds^{cb}_{t-1}$	& $-r^{bonds}_{t-1} Deb_{t-1}$		&							& $0$ \\
+Interest, gov. deposits		&								&								&						&								&						&									&							& $-r^{res}_{t-1} Depo^g_{t-1}$			& $+r^{res}_{t-1} Depo^g_{t-1}$		&							& $0$ \\
+\hline
+\textbf{Flow of funds}		&								&								&						&								&						&									&							&										&									&							& \\
+Change, deposits			& $-\Delta Sav^{acc}_t$			&								& $-\Delta NW^1_t$		&								& $-\Delta NW^2_t$		&									& $+\Delta Depo_t$			&										&									&							& $0$ \\
+Change, loans				&								&								& $+\Delta Deb^1_t$		&								& $+\Delta Deb^2_t$		&									& $-\Delta Loans_t$			&										&									&							& $0$ \\
+Change, monetary base		&								&								&						&								&						& 									& $+\Delta MB_t$			& $-\Delta MB_t$						&									&							& $0$ \\
+Change, reserves			&								&								&						&								&						&									& $-\Delta Res_t$			& $+\Delta Res_t$						&									&							& $0$ \\
+Change, excess reserves		&								&								&						&								&						&									& $-\Delta ExRes_t$			& $+\Delta ExRes_t$						&									&							& $0$ \\
+Change, liq. facilities		&								&								&						&								&						&									& $+\Delta Loans^{cb}_t$	& $-\Delta Loans^{cb}_t$				&									&							& $0$ \\
+Change, gov. bonds			&								&								&						&								&						&									& $-\Delta Bonds^b_t$		& $-\Delta Bonds^{cb}_t$				& $+\Delta Deb_t$					&							& $0$ \\
+Change, gov. deposits		&								&								&						&								&						&									&							& $+\Delta Depo^g_t$					& $-\Delta Depo^g_t$				&							& $0$ \\
+Change, int'l reserves		&								&								&						&								&						&									&							& $-\Delta IntRes_t$					&									& $+\Delta IntRes_t$		& $0$ \\
+\hline
+$\sum$						& $0$							& $0$							& $0$					& $0$							& $0$					& $0$								& $0$						& $0$									& $0$								& $0$						& $0$ \\
+\bottomrule
+\end{tabular}%
+\caption{Stock-flow consistency: transaction-flow matrix for a single country.\\
+To ensure consistency for the world, if $N$ is the number of countries, \enspace $\sum_{y=1}^N \Delta IntRes_{y,t} = 0$.\\
+$\Delta X_t = X_t - X_{t-1}$, \quad $\net \Pi^z_t = \Pi^z_t - Tax^z_t, z = 1, 2, b$, \quad $C_t^{w,l} = C_t^w - M^c_t$, \quad $I^{nom,l}_t = I^{nom}_t - M^k_t$.}
+\label{tab:SFC2-0.2}
+\end{table}
+\end{landscape}
+
+
+\end{appendices}
+
+\end{document}
