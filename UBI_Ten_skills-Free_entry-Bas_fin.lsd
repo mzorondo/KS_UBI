@@ -940,6 +940,7 @@ Label Root
 		Param: flagTradeK
 		Param: flagTradeKchg
 		Param: flagUBI
+		Param: flagUBIChg
 		Param: flagWageOffer
 		Param: flagWageOfferChg
 		Param: flagWagePremium
@@ -1112,7 +1113,8 @@ Param: flagTradeC 0 n + n n	0
 Param: flagTradeCchg 0 n + n n	0
 Param: flagTradeK 0 n + n n	0
 Param: flagTradeKchg 0 n + n n	0
-Param: flagUBI 0 n + n n	1
+Param: flagUBI 0 n + n n	0
+Param: flagUBIChg 0 n + n n	1
 Param: flagWageOffer 0 n + n n	0
 Param: flagWageOfferChg 0 n + n n	1
 Param: flagWagePremium 0 n + n n	1
@@ -1120,7 +1122,7 @@ Param: flagWorkerLBU 0 n + n n	2
 Param: flagWorkerSkProd 0 n + n n	2
 Param: IDcnt 0 n + n n	0
 Param: Tmt 0 n + n n	16
-Param: TregChg 0 n + n n	0
+Param: TregChg 0 n + n n	100
 Param: Tsh 0 n + n n	20
 Param: chiM 0 n + n n	0.01
 Param: fMax 0 n + n n	0.5
@@ -2508,6 +2510,10 @@ END_DESCRIPTION
 Parameter_flagUBI
 0 = No UBI
 1 = UBI as epsilonUBI*GDP
+END_DESCRIPTION
+
+Parameter_flagUBIChg
+
 END_DESCRIPTION
 
 Parameter_flagWageOffer

@@ -5,6 +5,7 @@ makemessage*.*
 run_gdb.bat
 lsd_gnu*
 lsd_gnu*.*
+LSD
 *.pdf
 *.png
 *.csv
@@ -12,6 +13,8 @@ lsd_gnu*.*
 *.tot
 *.gz
 *.exe
+*.o
+*.bak
 src/
 R/data/
 R/subbotools*/

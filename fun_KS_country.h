@@ -496,6 +496,7 @@ if ( T == ( int ) V( "TregChg" ) )				// in time, replace parameters
 	WRITE( "flagSearchMode", V( "flagSearchModeChg" ) );
 	WRITE( "flagTradeC", V( "flagTradeCchg" ) );
 	WRITE( "flagTradeK", V( "flagTradeKchg" ) );
+	WRITE( "flagUBI", V( "flagUBIChg" ) );	
 	WRITE( "tr", V( "trChg" ) );
 	WRITE( "trIn", V( "trInChg" ) );
 	WRITES( FINSECL0, "Lambda", VS( FINSECL0, "LambdaChg" ) );
