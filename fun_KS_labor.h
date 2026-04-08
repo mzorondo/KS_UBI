@@ -36,6 +36,13 @@ RESULT( VS( COUNTRL1, "flagEduc" ) == 0 ? 0 :
 		V( "epsilonEd" ) * VLS( COUNTRL1, "Y", 1 ) )
 
 
+EQUATION( "Gubi" )
+/*
+Public expenditure on UBI
+*/
+RESULT( VS( COUNTRL1, "flagUBI" ) == 0 ? 0 :
+		V( "epsilonUBI" ) * VLS( COUNTRL1, "Y", 1 ) )
+
 EQUATION( "Gtrain" )
 /*
 Public expenditure on unemployed worker training
@@ -228,6 +235,12 @@ Unemployment benefit ("wage") paid by government (or minimum income otherwise)
 */
 RESULT( VS( COUNTRL1, "flagGovExp" ) >= 2 ? V( "phi" ) * VL( "wAvg", 1 ) :
 											V( "w0min" ) )
+
+EQUATION( "wUBI" )
+/*
+Income provided by the UBI to receipients
+*/
+RESULT( V( "Gubi" ) / V( "Ls" ) )
 
 
 /*============================ SUPPORT EQUATIONS =============================*/

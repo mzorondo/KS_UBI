@@ -118,6 +118,9 @@ else
 // other transfers (education & training teacher salaries) uniformly distributed
 v[0] += ( VS( PARENT, "Ged" ) + VS( PARENT, "Gtrain" ) ) / VS( PARENT, "Ls" );
 
+// UBI transfer
+v[0] += VS( PARENT, "wUBI" );
+
 RESULT( v[0] )
 
 
