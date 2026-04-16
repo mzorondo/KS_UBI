@@ -559,6 +559,25 @@ if ( CURRENT > 0 && v[1] > 0 )
 	}
 }
 
+// UBI push on wR
+switch ( ( int ) VS( COUNTRL2, "flagUBIwR" ) )
+{
+	case 0:										// No effect of UBI on wR
+	default:
+		break;
+		
+	case 1:										// Step push
+		v[0] += VS( PARENT, "wUBI");
+		break;
+	
+	case 2:
+		v[2] = VS( PARENT, "wU" ) + VS( PARENT, "wUBI" ); // outside option
+		v[1] = max( v[2] , v[0] );
+		v[0] = v[1];
+		break;
+
+}
+
 RESULT( v[0] )
 
 
